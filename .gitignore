@@ -1,0 +1,8 @@
+composer.phar
+/web/avatars/user_uploaded
+/web/bundles/
+/app/bootstrap*
+/app/cache/*
+/app/logs/*
+/vendor/
+/app/config/parameters.yml

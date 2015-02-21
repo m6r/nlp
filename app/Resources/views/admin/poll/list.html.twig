@@ -1,0 +1,19 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block admin_content %}
+  <table class="table">
+    <tr>
+      <th>{{ 'label.election'|trans }}</th>
+      <th>{{ 'label.candidacies'|trans }}</th>
+    </tr>
+    {% for poll in polls %}
+      <tr><td>{{ poll.name }}</td> <td>{{ poll.candidacies|length }}</td></tr>
+    {% endfor %}
+  </table>
+{% endblock %}
+
+{% block javascript_footer %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
+    <script src="{{ asset('bundles/lexiktranslation/ng-table/ng-table.min.js') }}"></script>
+{% endblock %}

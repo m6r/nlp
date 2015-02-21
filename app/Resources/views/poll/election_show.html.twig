@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+  <style type="text/css">
+    img.pull-left {
+      margin-right: 10px;
+      margin-bottom: 5px;
+    }
+  </style>
+{% endblock %}
+
+{% block center_content %}
+  <ol class="breadcrumb">
+    <li><a href="{{ path('polls') }}">{{ 'votePlateform'|trans }}</a></li>
+    <li class="active">{{ election.name }}</li>
+  </ol>
+  <div class="page-header">
+    <h1>
+      {{ election.name }}
+      <small>({{ 'election.%voteNumber%'|transchoice(voteNumber, {'%voteNumber%': voteNumber}) }})</small>
+      {% if is_granted('ELECTION_CANDIDATE', election) %}
+        <a href="{{ path('election_candidate', {'id': election.id}) }}" class="btn btn-primary btn-lg">
+          {{ 'election.doCandidate'|trans }}
+        </a>
+      {% endif %}
+    </h1>
+  </div>
+
+    <div class="row">
+      <h2>{{ 'title.candidacies.list'|trans }}</h2>
+      {% for candidacy in election.candidacies|shuffle %}
+        <div class="col-md-6">
+          <h4>
+            <a target="_blank" href="{{ path('profile', {'username': candidacy.user.username}) }}">
+              {{ candidacy.user.username }}
+            </a>
+          </h4>
+          <img src="{{ asset(candidacy.user.avatarPath('large')) }}" class="pull-left img-thumbnail">
+          <p>
+            {{ candidacy.description|nl2br }}
+          </p>
+        </div>
+        {% if 0 == (loop.index % 2) %}
+          <div class="clearfix visible-xs-block"></div>
+        {% endif %}
+      {% else %}
+        <div class="col-md-12 text-center">
+          <h3>{{ 'election.noCandidates'|trans }}</h3>
+          {% if is_granted('ELECTION_CANDIDATE', election) %}
+            <a href="{{ path('election_candidate', {'id': election.id}) }}" class="btn btn-primary btn-lg">
+              {{ 'election.doCandidate'|trans }}
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+{% endblock %}

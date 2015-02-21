@@ -1,0 +1,10 @@
+app:
+    resource: @AppBundle/Controller/
+    type:     annotation
+
+logout:
+    path: /logout
+
+lexik_translation_edition:
+    resource: "@LexikTranslationBundle/Resources/config/routing.yml"
+    prefix:   /admin/translations

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block center_content %}
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="alert alert-warning">
+        {{ 'profileValidation.advice'|trans }}
+      </div>
+      {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="form-group">
+          {{ form_label(form.zipCode, 'zipCode'|trans) }}
+          {{ form_widget(form.zipCode) }}
+          {{ form_errors(form.zipCode) }}
+          <span class="help-block">{{ 'help.zipCodeField'|trans }}</span>
+        </div>
+        <div class="form-group">
+          {{ form_label(form.phoneNumber, 'phoneNumber'|trans) }}
+          {{ form_widget(form.phoneNumber) }}
+          {{ form_errors(form.phoneNumber) }}
+          <span class="help-block">{{ 'phoneNumberField.validationRule'|trans }}</span>
+        </div>
+        {{ form_widget(form.correctInformation, {'label': 'profile.confimCorrectInformations'|trans}) }}
+        {{ form_errors(form.correctInformation) }}
+        <input type="submit" value="{{ 'profile.validate'|trans }}" class="btn btn-primary">
+      {{ form_end(form) }}
+    </div>
+  </div>
+{% endblock %}

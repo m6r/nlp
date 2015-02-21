@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block center_content %}
+  <ol class="breadcrumb">
+    <li><a href="{{ path('polls') }}">{{ 'votePlateform'|trans }}</a></li>
+    <li><a href="{{ path('election_show', {'id': election.id}) }}">{{ election.name }}</a></li>
+    <li class="active">{{ 'election.doCandidate'|trans }}</li>
+  </ol>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="page-header"><h1>Je suis candidat-e !</h1></div>
+      <div class="alert alert-warning">
+        {{ 'candidacy.information'|trans }}
+      </div>
+      <div class="text-center">
+        <div class="h1">{{ app.user.username }}</div>
+        <img src="{{ asset(app.user.avatarPath('large')) }}" data-toggle="tooltip" data-placement="right" title="{{ 'help.changeAvatar'|trans }}">
+      </div>
+      {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div class="form-group">
+          {{ form_label(form.user.gender, 'label.gender'|trans) }}
+          {{ form_widget(form.user.gender.0, {'label': 'label.gender.female'|trans}) }}
+          {{ form_widget(form.user.gender.1, {'label': 'label.gender.male'|trans}) }}
+          {{ form_errors(form.user.gender) }}
+          <span class="help-block">{{ 'candidady.gender.help'|trans }}</span>
+        </div>
+        {{ form_row(form.user.firstName, {'label': 'label.firstName'|trans}) }}
+        {{ form_row(form.user.lastName, {'label': 'label.lastName'|trans}) }}
+        <div class="form-group">
+          <span class="help-block">{{ 'candidacy.identity.information'|trans }}</span>
+          {{ form_widget(form.hideIdentity, {'label': 'label.hideIdentity'|trans}) }}
+        </div>
+        {{ form_row(form.description, {'label': 'candidacy.label.description'|trans, 'attr': {'rows': 15}}) }}
+        {{ form_widget(form.confirmation, {'label': 'candidacy.confirmation'|trans}) }}
+        {{ form_errors(form.confirmation) }}
+        <input type="submit" value="{{ 'profile.validate'|trans }}" class="btn btn-primary">
+      {{ form_end(form) }}
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript_footer %}
+  {{ parent() }}
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    });
+  </script>
+{% endblock %}

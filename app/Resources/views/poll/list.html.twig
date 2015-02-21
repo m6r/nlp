@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block center_content %}
+  <div class="page-header">
+    <h1>{{ 'elections.listTitle.allowed'|trans }}</h1>
+  </div>
+  {% for election in userElections %}
+      <h2>
+        {{ election.name }}
+      </h2>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          {% if election.candidacies is not empty %}
+            <a href="{{ path('election_show', {'id': election.id}) }}" class="btn btn-default btn-lg">
+              {{ 'election.showCandidates'|trans }}
+            </a>
+          {% endif %}
+          {% if is_granted('ELECTION_CANDIDATE', election) %}
+            <a href="{{ path('election_candidate', {'id': election.id}) }}" class="btn btn-primary btn-lg">
+              {{ 'election.doCandidate'|trans }}
+            </a>
+          {% endif %}
+        </div>
+        {% if election.candidacies|length > 3 %}
+          <div class="col-md-12 text-muted">
+            <small>{{ 'title.election.list.extract'|trans }}</small>
+          </div>
+        {% endif %}
+        {% for candidacy in election.candidacies|shuffle|slice(0, 3) %}
+          <div class="col-md-4 text-center">
+            <h2>
+              <a target="_blank" href="{{ path('profile', {'username': candidacy.user.username}) }}">
+                {{ candidacy.user.username }}
+              </a>
+            </h2>
+            <img src="{{ asset(candidacy.user.avatarPath('large')) }}" class="img-circle">
+            <p class="text-justify">
+              {{ candidacy.description|truncate(200, true) }}
+            </p>
+          </div>
+        {% else %}
+          <div class="col-md-12 text-center">
+            <h3>{{ 'election.noCandidates'|trans }}</h3>
+          </div>
+        {% endfor %}
+      </div>
+  {% endfor %}
+
+  <h1>{{ 'elections.listTitle.others'|trans }}</h1>
+  {% for election in otherElections %}
+    <a href="{{ path('election_show', {'id': election.id}) }}">{{ election.criteria }}</a>
+    {% if not loop.last %} - {% endif %}
+  {% endfor %}
+{% endblock %}

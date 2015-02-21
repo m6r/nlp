@@ -1,0 +1,5 @@
+services:
+    app.vote_rules.assemblee2015:
+        class: VoteAssemblee2015Bundle\Poll\ElectionRule
+        tags:
+            - { name: app.election_rule }

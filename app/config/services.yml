@@ -1,0 +1,35 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+    app.sha256_pligg_encoder:
+        class: AppBundle\Security\Sha256PliggEncoder
+    app.table_prefix_listener:
+        class: AppBundle\Listener\TablePrefixListener
+        arguments: [%table_prefix%]
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata }
+    app.election_ruler:
+        class: AppBundle\Poll\ElectionRuler
+    app.security.access.election_rule_voter:
+        class:     AppBundle\Security\Authorization\Voter\ElectionRuleVoter
+        arguments: [@app.election_ruler]
+        public:    false
+        tags:
+            - { name: security.voter }
+    app.security.access.profile_locked_voter:
+        class:     AppBundle\Security\Authorization\Voter\ProfileLockedVoter
+        arguments: [%lock_profiles%]
+        public:    false
+        tags:
+            - { name: security.voter }
+    twig.extension.array:
+        class: Twig_Extensions_Extension_Array
+        tags:
+            - { name: twig.extension }
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }

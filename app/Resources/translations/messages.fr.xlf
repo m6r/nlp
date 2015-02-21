@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="89cea4921eb4128d476e0527da90707f" resname="site.name">
+        <source>site.name</source>
+        <target>Nom du site</target>
+      </trans-unit>
+      <trans-unit id="944612e4e393e4258f3dc72ed698454b" resname="link.profile">
+        <source>link.profile</source>
+        <target>Profile</target>
+      </trans-unit>
+      <trans-unit id="c1b5259357d8223776200bf7ced8f1af" resname="link.settings">
+        <source>link.settings</source>
+        <target>Réglages</target>
+      </trans-unit>
+      <trans-unit id="3bfc62d8394c4fe6b0f528fc25210647" resname="link.logout">
+        <source>link.logout</source>
+        <target>Se déconnecter</target>
+      </trans-unit>
+      <trans-unit id="91029bde035d3344d4df3c867848c119" resname="link.home">
+        <source>link.home</source>
+        <target>Accueil</target>
+      </trans-unit>
+      <trans-unit id="ceb9d1e840e1004af2f3b724b38e98c8" resname="link.submit">
+        <source>link.submit</source>
+        <target>Poster</target>
+      </trans-unit>
+      <trans-unit id="635ed02712d5f592d7894e8e1bc1b4e9" resname="link.groups">
+        <source>link.groups</source>
+        <target>Groupes</target>
+      </trans-unit>
+      <trans-unit id="7d7f14d098a4dd958ded94cf2b63b0ee" resname="link.polls">
+        <source>link.polls</source>
+        <target>Voter</target>
+      </trans-unit>
+      <trans-unit id="bab14e0873d358fc6e24895b2d38284a" resname="link.login">
+        <source>link.login</source>
+        <target>Se connecter</target>
+      </trans-unit>
+      <trans-unit id="ea3e3a21b2161aeb385caf3c8c94ed1b" resname="poll.create">
+        <source>poll.create</source>
+        <target>Créer</target>
+      </trans-unit>
+      <trans-unit id="04690da6d3ca208f2f065360ec75252f" resname="login.username">
+        <source>login.username</source>
+        <target>Identifiant</target>
+      </trans-unit>
+      <trans-unit id="f65ca78feddae7561d8d7e8f6f560c19" resname="login.password">
+        <source>login.password</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="d3fe95ffcfbaac372ae31e87617939b8" resname="login.send_form">
+        <source>login.send_form</source>
+        <target>Se connecter</target>
+      </trans-unit>
+      <trans-unit id="6377887c4f5ebbf5cdf3fa511546b405" resname="login.instructions">
+        <source>login.instructions</source>
+        <target>Merci de confirmer vos identifiants pour accéder à la plateforme
+          de vote.</target>
+      </trans-unit>
+      <trans-unit id="eeefa3a904b436c2218d68ef49930aa1" resname="link.admin">
+        <source>link.admin</source>
+        <target>Administration</target>
+      </trans-unit>
+      <trans-unit id="8ddebc48bf480812431e2e7025f807b5" resname="link.translations">
+        <source>link.translations</source>
+        <target>Traductions</target>
+      </trans-unit>
+      <trans-unit id="bee8266d4a14709b003760b340b88f77" resname="form.validate">
+        <source>form.validate</source>
+        <target>Valider</target>
+      </trans-unit>
+      <trans-unit id="f5518b3aaaa2622484b3bcf594525d63" resname="zipCode">
+        <source>zipCode</source>
+        <target>Code postal</target>
+      </trans-unit>
+      <trans-unit id="c9aa10b21bc611b05b1d8e0c01e5d397" resname="phoneNumber">
+        <source>phoneNumber</source>
+        <target>Numéro de téléphone</target>
+      </trans-unit>
+      <trans-unit id="231ae39bc8749489a8b9726db592fa73" resname="phoneNumberField.validationRule">
+        <source>phoneNumberField.validationRule</source>
+        <target>Exemple : 06xxxxxxxx ou +49xxxxxxxxxxxx pour l'étranger.</target>
+      </trans-unit>
+      <trans-unit id="47669a01873d39f43372f90276d66615" resname="profileValidation.advice">
+        <source>profileValidation.advice</source>
+        <target>Veuillez valider votre code postal et votre numéro de téléphone. Ceux-ci
+          seront verrouillés et ne pourront changer durant toute la période du vote.</target>
+      </trans-unit>
+      <trans-unit id="be7dd0e17c293e67b59324350501a284" resname="profile.validate">
+        <source>profile.validate</source>
+        <target>Valider</target>
+      </trans-unit>
+      <trans-unit id="7e38f9db546bd34df0df07b17828af13" resname="profile.confimCorrectInformations">
+        <source>profile.confimCorrectInformations</source>
+        <target>Ces informations sont correctes</target>
+      </trans-unit>
+      <trans-unit id="420f05f762081a5fd23e265f1d0954be" resname="elections.listTitle.allowed">
+        <source>elections.listTitle.allowed</source>
+        <target>Élections auxquelles je peux participer</target>
+      </trans-unit>
+      <trans-unit id="496dfc8ff559e5de9e64e1a561942d44" resname="elections.listTitle.others">
+        <source>elections.listTitle.others</source>
+        <target>Autres votes</target>
+      </trans-unit>
+      <trans-unit id="7064fb6d90ca5bd1b0245fe555aa8c72" resname="election.showCandidates">
+        <source>election.showCandidates</source>
+        <target>Voir les candidat-e-s</target>
+      </trans-unit>
+      <trans-unit id="8dec31ec7d2ccc5972809e8010e457d1" resname="election.noCandidates">
+        <source>election.noCandidates</source>
+        <target>Pas encore de candidat-e-s</target>
+      </trans-unit>
+      <trans-unit id="5fa753a4e72641f87e58447f0b346bb0" resname="election.doCandidate">
+        <source>election.doCandidate</source>
+        <target>Je candidate !</target>
+      </trans-unit>
+      <trans-unit id="7ef015ac34ec8825641f0d165d052be7" resname="votePlateform">
+        <source>votePlateform</source>
+        <target>Plateforme de vote</target>
+      </trans-unit>
+      <trans-unit id="2e48d189b9a534f0a8215101df9ced11" resname="candidacy.label.description">
+        <source>candidacy.label.description</source>
+        <target>Texte accompagnant ma candidature</target>
+      </trans-unit>
+      <trans-unit id="0f223efa2cc05d67f9cc84829cb154ce" resname="candidacy.confirmation">
+        <source>candidacy.confirmation</source>
+        <target>Je confirme ma candidature</target>
+      </trans-unit>
+      <trans-unit id="c9999a5138966cdc6a938169d6df8982" resname="candidacy.information">
+        <source>candidacy.information</source>
+        <target>Vous êtes en train de vous inscrire pour candidater à l'assemblée représentative
+          du M6R «Nous le Peuple». Cette candidature est définitive. Vérifiez bien les informations
+          quee vous fournissez. Merci ! C'est ensemble que le
+          mouvement se construit.</target>
+      </trans-unit>
+      <trans-unit id="20433b5e57b982f29b1ca8b9b9848c51" resname="label.gender">
+        <source>label.gender</source>
+        <target>Genre</target>
+      </trans-unit>
+      <trans-unit id="6552260489d694fd2421e78e80dae67d" resname="label.gender.female">
+        <source>label.gender.female</source>
+        <target>Femme</target>
+      </trans-unit>
+      <trans-unit id="fecf43cfa8267e53476f23ac6e355eb5" resname="label.gender.male">
+        <source>label.gender.male</source>
+        <target>Homme</target>
+      </trans-unit>
+      <trans-unit id="e1d7344eda2aca2fe453fcb7ce10a57b" resname="candidady.gender.help">
+        <source>candidady.gender.help</source>
+        <target>Cette information sera publique. Elle vise à respecter la parité de l'Assemblée.</target>
+      </trans-unit>
+      <trans-unit id="aedad601dde1c814221ac0aea59881e5" resname="help.changeAvatar">
+        <source>help.changeAvatar</source>
+        <target>Vous pouvez changer votre avatar dans votre profil Nous le Peuple</target>
+      </trans-unit>
+      <trans-unit id="86a50ae869c82ff38e569109ec95cd95" resname="label.firstName">
+        <source>label.firstName</source>
+        <target>Prénom</target>
+      </trans-unit>
+      <trans-unit id="ca5b2925c56dacefe4d8398af0124996" resname="label.lastName">
+        <source>label.lastName</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="957dd7411b2b24c330a0921a7182265a" resname="candidacy.identity.information">
+        <source>candidacy.identity.information</source>
+        <target>Votre nom et votre prénom ne seront pas publics durant la phase de vote.
+          Néanmoins, ils seront publiés si vous êtes élu-e lors de la proclamation des résultats.
+          Vous pouvez choisir de rester anonyme en cochant la case ci-dessous.</target>
+      </trans-unit>
+      <trans-unit id="1c9f965124825a42894fcc2f854eb6cb" resname="label.hideIdentity">
+        <source>label.hideIdentity</source>
+        <target>Ne pas publier mon identité lors de la proclamation des résultats</target>
+      </trans-unit>
+      <trans-unit id="4111a4670424b0d8101f7d513f9b9d63" resname="election.%voteNumber%">
+        <source>election.%voteNumber%</source>
+        <target>%voteNumber% siège|%voteNumber% sièges</target>
+      </trans-unit>
+      <trans-unit id="d212402f22114032e5cbd632b3813a44" resname="title.candidacies.list">
+        <source>title.candidacies.list</source>
+        <target>Liste des candidatures</target>
+      </trans-unit>
+      <trans-unit id="fc88c83bc9586330f070925a3a379526" resname="title.election.list.extract">
+        <source>title.election.list.extract</source>
+        <target>Quelques candidat-e-s au hasard</target>
+      </trans-unit>
+      <trans-unit id="a195280fc0d3224fe927331d8c6e4bdb" resname="help.zipCodeField">
+        <source>help.zipCodeField</source>
+        <target>99999 pour l'étranger</target>
+      </trans-unit>
+      <trans-unit id="b50bafc56c5b9d279ad2c2d3da7c40c7" resname="forgotPassword">
+        <source>forgotPassword</source>
+        <target>Mot de passe oublié</target>
+      </trans-unit>
+      <trans-unit id="6ffd2d6474ca40bb1ae138cec5b05462" resname="label.election">
+        <source>label.election</source>
+        <target>Élections</target>
+      </trans-unit>
+      <trans-unit id="4218da3ec1323392a026e29e5944bd77" resname="label.candidacies">
+        <source>label.candidacies</source>
+        <target>Candidatures</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
