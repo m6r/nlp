@@ -1,6 +1,10 @@
 Contribuer
 ==========
 
+Ce fichier a pour but de vous aider à contribuer si vous ne connaissez pas Github
+et les Pull Requests. Les règles à respecter pour les standards de code sont à
+lire dans le [README](https://github.com/m6r/nouslepeuple/blob/master/README.md).
+
 1: Configurer votre environnement
 ---------------------------------
 

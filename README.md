@@ -8,8 +8,8 @@ C'est la plateforme qui permet déjà le fonctionnement du vote pour l'Assemblé
 Représentative du mouvement.
 
 Si vous êtes développeuse ou développeur, vous êtes invité-e à contribuer au
-développement en rejoignant la liste http://listes.m6r.fr/wws/info/nouslepeuple-
-devel, et en faisant des pull requests. Avant toute chose, lisez cependant le
+développement en rejoignant la liste http://listes.m6r.fr/wws/info/nouslepeuple-devel,
+et en faisant des pull requests. Avant toute chose, lisez cependant le
 [paragraphe suivant](#contribuer) ainsi le fichier
 [CONTRIBUTING](https://github.com/m6r/nouslepeuple/blob/master/CONTRIBUTING.md).
 
@@ -31,5 +31,16 @@ l'aide dans le fichier
 Les contributions doivent être accompagnées des tests unitaires nécessaires.
 
 Le code suit les standards [PSR-1](http://www.php-fig.org/psr/psr-1/) et
-[PSR-2](http://www.php-fig.org/psr/psr-2/), plus les standards de [php-cs-fixer]
-avec `--level=symfony`.
+[PSR-2](http://www.php-fig.org/psr/psr-2/), plus les standards de [php-cs-
+fixer](http://cs.sensiolabs.org/) avec `--level=symfony`.
+
+Toutes les traductions qui est possible de faire dans les templates doivent être
+faites dans les templates à l'aide du filtre `trans`, de manière à pouvoir
+utiliser la commande `translation:update`. Cela signifie notamment qu'il faut
+rendre une partie des formulaires à la main. Dans certains cas particuliers,
+comme pour les messages flash, cela est impossible. Ces messages doivent alors
+être appelé dans un catalogue séparé au format XLIFF, de manière à ce que
+message.fr.xlf puisse être généré automatiquement.
+
+Les noms de méthodes et fonctions ainsi que les commentaires sont à écrire en
+anglais.
