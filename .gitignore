@@ -6,3 +6,4 @@ composer.phar
 /app/logs/*
 /vendor/
 /app/config/parameters.yml
+/bin

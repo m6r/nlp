@@ -9,6 +9,12 @@ parameters:
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
+    # This must be defined in order for tests to work when database is not
+    # set up (eg. on travis), otherwise Doctrine will try to connect the
+    # database and generate error. See : https://github.com/symfony/symfony-standard/issues/748
+    # Put it to the correct value.
+    database_server_version : "5.0"
+
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
     mailer_user:       ~

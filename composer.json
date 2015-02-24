@@ -21,7 +21,8 @@
         "stof/doctrine-extensions-bundle": "~1.1"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "fabpot/php-cs-fixer": "*"
     },
     "scripts": {
         "post-root-package-install": [
