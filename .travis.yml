@@ -9,6 +9,6 @@ script:
   - phpunit -c app/
 before_script:
   - mysql -e 'create database symfony;'
-  - app/console doctrine:schema:update --force
   - cp app/config/parameters.yml.dist app/config/parameters.yml
   - composer install
+  - app/console doctrine:schema:update --force
