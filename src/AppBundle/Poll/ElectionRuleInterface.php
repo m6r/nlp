@@ -76,7 +76,8 @@ interface ElectionRuleInterface
     /**
      * Get the maximum number of winners there can be in an election.
      *
-     * @param  Election $election The number of winners
+     * @param Election $election The number of winners
+     *
      * @return integer
      */
     public function getWinnersNumber(Election $election);
