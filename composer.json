@@ -1,5 +1,5 @@
 {
-    "license": "AGPL-3.0+",
+    "license": "AGPL-3.0",
     "type": "project",
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }

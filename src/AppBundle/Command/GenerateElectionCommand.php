@@ -35,7 +35,7 @@ class GenerateElectionCommand extends ContainerAwareCommand
         $criterias = $electionRuler->getValidCriterias();
 
         if (!array_key_exists($group, $criterias)) {
-            throw new Error('This election group does not exist.');
+            throw new \Error('This election group does not exist.');
         }
 
         // Ask dates
