@@ -1106,7 +1106,10 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function isAccountNonLocked()
     {
-        return in_array($this->level, array('normal', 'moderator', 'admin'), true);
+        $confirmed = $this->lastLogin > new \DateTime('00-00-0000 00:00:00');
+        $notBlocked = in_array($this->level, array('normal', 'moderator', 'admin'), true);
+
+        return $confirmed && $notBlocked;
     }
 
     /**
