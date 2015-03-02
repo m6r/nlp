@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Poll\Election;
 use AppBundle\Entity\Poll\Candidacy;
-use AppBundle\Form\CandidacyType;
+use AppBundle\Form\Type\CandidacyType;
 
 /**
  * @Route("/polls")

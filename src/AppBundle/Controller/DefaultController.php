@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Form\VoterProfileValidationType;
+use AppBundle\Form\Type\VoterProfileValidationType;
 use AppBundle\Entity\Poll\ProfileLock;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;

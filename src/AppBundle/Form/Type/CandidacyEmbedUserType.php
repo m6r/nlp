@@ -1,23 +1,22 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
-class VoterProfileValidationType extends AbstractType
+class CandidacyEmbedUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('zipCode')
-            ->add('phoneNumber')
-            ->add('correctInformation', 'checkbox', array(
-                'mapped' => false,
-                'constraints' => array(new NotBlank()),
+            ->add('gender', 'choice', array(
+                'expanded' => true,
+                'choices' => array('F' => 'F', 'M' => 'M'),
             ))
+            ->add('firstName')
+            ->add('lastName')
         ;
     }
 
@@ -25,11 +24,12 @@ class VoterProfileValidationType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\User',
+            'validation_groups' => array('candidacy'),
         ));
     }
 
     public function getName()
     {
-        return 'voter_profile_validation';
+        return 'candidacy_embed_user';
     }
 }
