@@ -22,7 +22,7 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "fabpot/php-cs-fixer": "*"
+        "fabpot/php-cs-fixer": "~1.5"
     },
     "scripts": {
         "post-root-package-install": [
