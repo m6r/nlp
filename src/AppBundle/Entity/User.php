@@ -58,7 +58,7 @@ class User implements AdvancedUserInterface, \Serializable
      * @deprecated
      * @ORM\Column(type="string", length=128, name="user_names", options={"default"=""})
      */
-    private $names;
+    private $names = '';
 
     /**
      * @deprecated
@@ -69,7 +69,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=128, name="user_url", options={"default"=""})
      */
-    private $url;
+    private $url = '';
 
     /**
      * @ORM\Column(type="datetime", name="user_lastlogin", options={"default"="0000-00-00 00:00:00"})
@@ -79,55 +79,55 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=64, name="user_facebook", options={"default"=""})
      */
-    private $facebook;
+    private $facebook = '';
 
     /**
      * @ORM\Column(type="string", length=64, name="user_twitter", options={"default"=""})
      */
-    private $twitter;
+    private $twitter = '';
 
     /**
      * @deprecated
      * @ORM\Column(type="string", length=64, name="user_linkedin", options={"default"=""})
      */
-    private $linkedin;
+    private $linkedin = '';
 
     /**
      * @ORM\Column(type="string", length=64, name="user_googleplus", options={"default"=""})
      */
-    private $googleplus;
+    private $googleplus = '';
 
     /**
      * @deprecated
      * @ORM\Column(type="string", length=64, name="user_skype", options={"default"=""})
      */
-    private $skype;
+    private $skype = '';
 
     /**
      * @deprecated
      * @ORM\Column(type="string", length=64, name="user_pinterest", options={"default"=""})
      */
-    private $pinterest;
+    private $pinterest = '';
 
     /**
      * @ORM\Column(type="string", length=64, name="public_email", options={"default"=""})
      */
-    private $publicEmail;
+    private $publicEmail = '';
 
     /**
      * @ORM\Column(type="string", length=255, name="user_avatar_source", options={"default"=""})
      */
-    private $avatarSource;
+    private $avatarSource = '';
 
     /**
      * @ORM\Column(type="string", length=20, name="user_ip", nullable=true, options={"default"="0"})
      */
-    private $userIP;
+    private $userIP = '0';
 
     /**
      * @ORM\Column(type="string", length=20, name="user_lastip", nullable=true, options={"default"="0"})
      */
-    private $userLastIP;
+    private $userLastIP = '0';
 
     /**
      * @ORM\Column(type="datetime", name="last_reset_request", options={"default"="0000-00-00 00:00:00"})
@@ -152,12 +152,12 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=255, name="user_categories", options={"default"=""})
      */
-    private $categories;
+    private $categories = '';
 
     /**
      * @ORM\Column(type="boolean", length=255, name="user_enabled", options={"default"="1"})
      */
-    private $enabled;
+    private $enabled = '1';
 
     /**
      * @deprecated
