@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Nelmio\Alice\Fixtures;
 
-class LoadUserData implements FixtureInterface, ContainerAwareInterface
+class LoadData implements FixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -28,7 +28,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
      */
     public function load(ObjectManager $manager)
     {
-        $objects = Fixtures::load(__DIR__.'/data/users.yml', $manager, array('providers' => array($this)));
+        $objects = Fixtures::load(__DIR__.'/data/fixtures.yml', $manager, array('providers' => array($this)));
 
         $manager->flush();
     }

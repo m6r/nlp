@@ -127,4 +127,10 @@ class ElectionRuler
         return $this->electionRules[$election->getGroup()]
             ->getVoteNumber($user, $election);
     }
+
+    public function hasGenderParity(Election $election)
+    {
+        return $this->electionRules[$election->getGroup()]
+            ->hasGenderParity();
+    }
 }
