@@ -41,7 +41,7 @@ class Election extends GenericPoll
 
     public function __construct()
     {
-        $this->candidates = new ArrayCollection();
+        $this->candidacies = new ArrayCollection();
     }
 
     /**
