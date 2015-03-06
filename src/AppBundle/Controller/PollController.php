@@ -53,7 +53,10 @@ class PollController extends Controller
         }
 
         $otherPolls = $em->getRepository('AppBundle:Poll\Poll')->findAllCurrent();
-        $otherElections = $em->getRepository('AppBundle:Poll\Election')->findAllCurrent();
+        $elections = $em->getRepository('AppBundle:Poll\Election')->findAllCurrent();
+        $otherElections = array_udiff($elections, $userElections, function ($a, $b) {
+            return $a->getId() === $b->getId();
+        });
 
         return $this->render('poll/list.html.twig', array(
             'userElections' => $userElections,

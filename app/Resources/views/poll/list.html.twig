@@ -51,7 +51,7 @@
       </div>
   {% endfor %}
 
-  <h1>{{ 'elections.listTitle.others'|trans }}</h1>
+  {% if otherElections is not empty %}<h1>{{ 'elections.listTitle.others'|trans }}</h1>{% endif %}
   {% for election in otherElections %}
     <a href="{{ path('election_show', {'id': election.id}) }}">{{ election.criteria }}</a>
     {% if not loop.last %} - {% endif %}
