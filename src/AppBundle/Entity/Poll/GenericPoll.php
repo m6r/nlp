@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity\Poll;
 
+use AppBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -116,9 +117,22 @@ abstract class GenericPoll
      */
     protected $choices;
 
+    /**
+     * All user who voted for the poll.
+     *
+     * @var array
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinTable("polls_voters", inverseJoinColumns={
+     *     @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
+     * })
+     */
+    protected $voters;
+
     public function __construct()
     {
         $this->choices = new ArrayCollection();
+        $this->voter = new ArrayCollection();
     }
 
     /**
@@ -248,5 +262,27 @@ abstract class GenericPoll
     public function setCriteria($criteria)
     {
         $this->criteria = $criteria;
+    }
+
+    /**
+     * Add a voter to the vote.
+     *
+     * @param User $user
+     */
+    public function addVoter(User $user)
+    {
+        $this->voters->add($user);
+    }
+
+    /**
+     * Has a user voted to this election.
+     *
+     * @param User $user
+     *
+     * @return boolean
+     */
+    public function hasVoted(User $user)
+    {
+        return $this->voters->contains($user);
     }
 }

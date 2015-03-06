@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block center_content %}
+  <ol class="breadcrumb">
+    <li><a href="{{ path('polls') }}">{{ 'votePlateform'|trans }}</a></li>
+    <li><a href="{{ path('election_show', {'id': election.id}) }}">{{ election.name }}</a></li>
+    <li><a href="{{ path('election_vote', {'id': election.id}) }}">{{ 'election.doVote'|trans }}</a></li>
+    <li class="active">{{ 'vote.confirm'|trans }}</li>
+  </ol>
+  <div class="page-header">
+    <h1>
+      {{ election.name }}
+      <small>({{ 'election.%voteNumber%'|transchoice(voteNumber, {'%voteNumber%': voteNumber}) }})</small>
+    </h1>
+  </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        {{ 'vote.confirmation.information'|trans }}
+        {% if vote.candidacies|length < voteNumber %}
+          <div class="alert alert-warning">
+            {{ 'vote.confirmation.information.blank'|trans }}
+          </div>
+        {% endif %}
+        <div class="row">
+          {% for candidacy in vote.candidacies|shuffle %}
+            <div class="col-sm-2 col-xs-6 text-center nlp-candidacy">
+              <h5 class="nlp-candidacy-username">
+                {{ candidacy.user.username }}
+                {% if 'M' == candidacy.user.gender %}
+                  ({{ 'label.gender.male'|trans }})
+                {% elseif 'F' == candidacy.user.gender %}
+                  ({{ 'label.gender.female'|trans }})
+                {% endif %}
+              </h5>
+              <img src="{{ asset(candidacy.user.avatarPath('large')) }}" class="img-thumbnail">
+            </div>
+            {% if 0 == loop.index % 4 %}<div class="clearfix"></div>{% endif %}
+          {% endfor %}
+        </div>
+        {{ form_start(form) }}
+          {{ form_errors(form) }}
+          {{ form_widget(form.confirmation, {'label': 'vote.confirmation'|trans}) }}
+          {{ form_errors(form.confirmation) }}
+          <input type="submit" value="{{ 'label.validate'|trans }}" class="btn btn-primary">
+          <a href="{{ path('election_vote', {'id': election.id }) }}" class="btn btn-default">
+            {{ 'label.cancel'|trans }}
+          </a>
+        {{ form_end(form) }}
+      </div>
+    </div>
+{% endblock %}

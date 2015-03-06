@@ -6,6 +6,10 @@
         <source>flash.candidacy.sent</source>
         <target>Votre candidature a bien été enregistrée.</target>
       </trans-unit>
+      <trans-unit id="fd9e5b777b61e635ad5e40b3f3623aba" resname="flash.vote.sent">
+        <source>flash.vote.sent</source>
+        <target>Votre vote a bien été enregistrée.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

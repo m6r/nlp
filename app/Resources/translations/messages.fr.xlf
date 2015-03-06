@@ -201,6 +201,57 @@
         <source>label.candidacies</source>
         <target>Candidatures</target>
       </trans-unit>
+      <trans-unit id="7b46b0d05904bf45267c8250e8071567" resname="election.doVote">
+        <source>election.doVote</source>
+        <target>Voter</target>
+      </trans-unit>
+      <trans-unit id="728e97755ec8209a9d7b7cd132b6207d" resname="label.gender.male.short">
+        <source>label.gender.male.short</source>
+        <target>H</target>
+      </trans-unit>
+      <trans-unit id="34e8f3dec1b2c9afc11212ee0a7d5096" resname="label.gender.female.short">
+        <source>label.gender.female.short</source>
+        <target>F</target>
+      </trans-unit>
+      <trans-unit id="e33db382d6d70e502c5411ef7f86d40f" resname="label.validate">
+        <source>label.validate</source>
+        <target>Valider</target>
+      </trans-unit>
+      <trans-unit id="8c1e7db9a4662e4e2960ee713f29b0ab" resname="help.clickCandidacyToSee">
+        <source>help.clickCandidacyToSee</source>
+        <target>Cliquez sur la photo d'une candidature pour voir les détails.</target>
+      </trans-unit>
+      <trans-unit id="039aafa2071a684e7b92556e5c67e462" resname="vote.information.%voteNumber%">
+        <source>vote.information.%voteNumber%</source>
+        <target>Vous pouvez cocher %voteNumber% siège.|Vous pouvez cocher %voteNumber% sièges,
+          ou moins si vous souhaitez voter blanc.</target>
+      </trans-unit>
+      <trans-unit id="6fb450d8b82ec2e18f263baac4563af7" resname="vote.information.parity">
+        <source>vote.information.parity</source>
+        <target>Vous devez cocher le même nombre d'hommes et de femmes.</target>
+      </trans-unit>
+      <trans-unit id="38f7d06da09aeed5143d1c28d053f7b2" resname="vote.confirm">
+        <source>vote.confirm</source>
+        <target>Confirmer</target>
+      </trans-unit>
+      <trans-unit id="707ee54ac887a415e04bdb271440304b" resname="vote.confirmation.information">
+        <source>vote.confirmation.information</source>
+        <target>Voici la liste des candidates et des candidats que vous avez cochée.</target>
+      </trans-unit>
+      <trans-unit id="449b8a61c2324b460f3c678ab5687642" resname="vote.confirmation">
+        <source>vote.confirmation</source>
+        <target>Je valide définitivement ce vote.</target>
+      </trans-unit>
+      <trans-unit id="8b104002f62df6f7ab45fc174877bbb9" resname="label.cancel">
+        <source>label.cancel</source>
+        <target>Annuler</target>
+      </trans-unit>
+      <trans-unit id="4b00709be12d61dc448627c013196aa6" resname="vote.confirmation.information.blank">
+        <source>vote.confirmation.information.blank</source>
+        <target>Vous avez coché moins de candidates et de candidats que de sièges à pouvoir. Si ce
+        n'est pas ce que vous souhaitez, vous pouvez modifier votre vote en cliquant sur Annuler.
+        Sinon, vous pouvez confirmer.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

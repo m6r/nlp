@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+  <style type="text/css">
+    .nlp-candidacy {
+      padding-bottom: 10px;
+    }
+
+    .nlp-candidacy:hover {
+      background-color: #EEE;
+    }
+
+    .nlp-candidacy.active {
+      background-color: #DDD;
+    }
+
+    .nlp-candidacy.selected .img-thumbnail {
+      border: 3px solid #FCB729;
+    }
+  </style>
+{% endblock %}
+
+{% block center_content %}
+  <ol class="breadcrumb">
+    <li><a href="{{ path('polls') }}">{{ 'votePlateform'|trans }}</a></li>
+    <li><a href="{{ path('election_show', {'id': election.id}) }}">{{ election.name }}</a></li>
+    <li class="active">{{ 'election.doVote'|trans }}</li>
+  </ol>
+  <div class="page-header">
+    <h1>
+      {{ election.name }}
+      <small>({{ 'election.%voteNumber%'|transchoice(voteNumber, {'%voteNumber%': voteNumber}) }})</small>
+    </h1>
+  </div>
+
+    <div class="row">
+      <h2>{{ 'title.candidacies.list'|trans }}</h2>
+      <div class="col-md-6">
+        <div class="alert alert-warning">
+          {{ 'vote.information.%voteNumber%'|transchoice(voteNumber,{'%voteNumber%': voteNumber}) }}
+          {% if parity %}{{ 'vote.information.parity'|trans }}{% endif %}
+        </div>
+        {{ form_start(form) }}
+          <div class="row nlp-candidacy-list">
+            {{ form_errors(form) }}
+            {{ form_errors(form.candidacies) }}
+            {% for candidacyField in form.candidacies|shuffle %}
+              {% set candidacy = form.candidacies.vars.choices[candidacyField.vars.value].data %}
+              <div class="col-sm-3 col-xs-6 text-center nlp-candidacy">
+                <h5 class="nlp-candidacy-username">
+                  {% if 'M' == candidacy.user.gender %}
+                    {% set gender = 'label.gender.male'|trans %}
+                  {% elseif 'F' == candidacy.user.gender %}
+                    {% set gender = 'label.gender.female'|trans %}
+                  {% endif %}
+                  {{ form_widget(candidacyField, {'label': (candidacy.user.username|e ~ ' (' ~ gender ~ ')')}) }}
+                </h5>
+                <img src="{{ asset(candidacy.user.avatarPath('large')) }}" class="img-thumbnail">
+                <a href="{{ path('profile', {'username': candidacy.user.username}) }}" class="sr-only nlp-candidacy-profile-link">{{ 'link.profile'|trans }}</a>
+                <p class="sr-only nlp-candidacy-description">{{ candidacy.description|nl2br }}</p>
+              </div>
+              {% if 0 == loop.index % 4 %}<div class="clearfix"></div>{% endif %}
+            {% else %}
+              <h3>{{ 'election.noCandidates'|trans }}</h3>
+            {% endfor %}
+          </div>
+          <input type="submit" value="{{ 'label.validate'|trans }}" class="btn btn-primary btn-block">
+        {{ form_end(form) }}
+      </div>
+      <div class="col-md-6">
+        <h3 id="nlp-candidacy-username"></h3>
+        <p id="nlp-candidacy-description"></p>
+        <p class="text-muted text-center">{{ 'help.clickCandidacyToSee'|trans }}</p>
+      </div>
+    </div>
+{% endblock %}
+
+{% block javascript_footer %}
+  {{ parent() }}
+  <script>
+    $(function() {
+      $('.nlp-candidacy').click(function() {
+        $('.nlp-candidacy.active').removeClass('active');
+        $(this).addClass('active');
+        var username = $(this).find('.nlp-candidacy-username').text();
+        var description = $(this).find('.nlp-candidacy-description').html();
+        var href = $(this).find('a.nlp-candidacy-description-profile-link').attr('href');
+        $('#nlp-candidacy-username').html(username + ' <small><a href="' + href + '" target="_blank">{{ 'link.profile'|trans }}</a></small>');
+        $('#nlp-candidacy-description').html(description);
+      })
+
+      var count = $('.nlp-candidacy .checkbox input:checkbox:checked').length;
+
+      $('.nlp-candidacy .checkbox input:checkbox:checked').closest('.nlp-candidacy').addClass('selected');
+      $('.nlp-candidacy .checkbox input:checkbox').change(function() {
+        $('#election_vote_confirmation').prop('checked', false);
+
+        if (true === $(this).prop('checked')) {
+          $(this).closest('.nlp-candidacy').addClass('selected');
+          count++;
+          if (count >= {{ voteNumber }}) {
+            $(this).closest('form').find('input:checkbox').not(':checked').not('#election_vote_confirmation').prop('disabled', true);
+          }
+
+          return;
+        }
+
+        count--;
+        if (count < {{ voteNumber }}) {
+          $(this).closest('form').find('input:checkbox').not(':checked').not('#election_vote_confirmation').prop('disabled', false);
+        }
+        $(this).closest('.nlp-candidacy').removeClass('selected');
+      });
+    });
+  </script>
+{% endblock %}

@@ -76,8 +76,9 @@ class ElectionRuleVoter implements VoterInterface
                 $allowed = $this->electionRuler->isAllowedtoVote($user, $election);
                 $opened = (new \DateTime() > $election->getOpenDate());
                 $closed = (new \DateTime() > $election->getCloseDate());
+                $hasVoted = $election->hasVoted($user);
 
-                if ($this->electionRuler->isAllowedToVote($user, $election)) {
+                if ($allowed && $opened && !$closed && !$hasVoted) {
                     return VoterInterface::ACCESS_GRANTED;
                 }
                 break;

@@ -20,6 +20,11 @@
               {{ 'election.doCandidate'|trans }}
             </a>
           {% endif %}
+          {% if is_granted('ELECTION_VOTE', election) %}
+            <a href="{{ path('election_vote', {'id': election.id}) }}" class="btn btn-primary btn-lg">
+              {{ 'election.doVote'|trans }}
+            </a>
+          {% endif %}
         </div>
         {% if election.candidacies|length > 3 %}
           <div class="col-md-12 text-muted">

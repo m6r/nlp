@@ -32,4 +32,24 @@ class ProfileLock
     {
         $this->user = $user;
     }
+
+    /**
+     * Get id.
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get user.
+     *
+     * @return AppBundle\Entity\User The user.
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
