@@ -252,6 +252,11 @@
         n'est pas ce que vous souhaitez, vous pouvez modifier votre vote en cliquant sur Annuler.
         Sinon, vous pouvez confirmer.</target>
       </trans-unit>
+      <trans-unit id="c322434cebbb24730ee120297eb32995" resname="login.instructions.registration">
+        <source>login.instructions.registration</source>
+        <target>Pour voter, vous devez disposer d’abord d’un compte « Nous le Peuple ». Ce n’est pas encore le cas ?
+          Vous pouvez vous inscrire %link_start%en cliquant ici%link_end%.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

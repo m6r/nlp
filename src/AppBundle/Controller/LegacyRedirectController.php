@@ -57,4 +57,14 @@ class LegacyRedirectController extends Controller
 
         return $this->redirect($baseUrl.'/login.php');
     }
+
+    /**
+     * @Route("/register", name="register")
+     */
+    public function registerAction()
+    {
+        $baseUrl = $this->container->getParameter('legacy_base_url');
+
+        return $this->redirect($baseUrl.'/register.php');
+    }
 }
