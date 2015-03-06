@@ -63,7 +63,7 @@ class PollController extends Controller
     }
 
     /**
-     * @Route("/election/show/{id}", name="election_show")
+     * @Route("/election/{id}/show", name="election_show", requirements={"id": "\d+"})
      * @Security("is_granted('IS_PROFILE_LOCKED')")
      */
     public function showElectionAction(Election $election)
@@ -77,7 +77,7 @@ class PollController extends Controller
     }
 
     /**
-     * @Route("/election/candidate/{id}", name="election_candidate")
+     * @Route("/election/{id}/candidate", name="election_candidate", requirements={"id": "\d+"})
      * @Security("is_granted('IS_PROFILE_LOCKED') && is_granted('ELECTION_CANDIDATE', election)")
      */
     public function doCandidateAction(Election $election, Request $request)
