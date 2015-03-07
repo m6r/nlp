@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <body>
+      <trans-unit id="7f41ffe807881bf4ac52bfa854af1978" resname="gender_parity">
+        <source>gender_parity</source>
+        <target>Attention, vous devez choisir le même nombre d’hommes et de femmes !</target>
+      </trans-unit>
+      <trans-unit id="212d640afe6dd339b764b4d445aa0bbf" resname="max_candidacies">
+        <source>max_candidacies</source>
+        <target>Vous avez choisi trop de candidats ! Veuillez sélectionner au plus {{ limit }} candidats.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

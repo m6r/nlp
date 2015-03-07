@@ -16,12 +16,12 @@
 
     <div class="row">
       <div class="col-md-12">
-        {{ 'vote.confirmation.information'|trans }}
         {% if vote.candidacies|length < voteNumber %}
           <div class="alert alert-warning">
             {{ 'vote.confirmation.information.blank'|trans }}
           </div>
         {% endif %}
+        {{ 'vote.confirmation.information'|trans }}
         <div class="row">
           {% for candidacy in vote.candidacies|shuffle %}
             <div class="col-sm-2 col-xs-6 text-center nlp-candidacy">
@@ -36,6 +36,10 @@
               <img src="{{ asset(candidacy.user.avatarPath('large')) }}" class="img-thumbnail">
             </div>
             {% if 0 == loop.index % 4 %}<div class="clearfix"></div>{% endif %}
+          {% else %}
+            <div class="col-md-12">
+              {{ 'vote.noCandidates'|trans }}
+            </div>
           {% endfor %}
         </div>
         {{ form_start(form) }}

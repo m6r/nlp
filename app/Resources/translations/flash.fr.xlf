@@ -4,11 +4,11 @@
     <body>
       <trans-unit id="fd9e5b777b61e635a25e40b3f3623aba" resname="flash.candidacy.sent">
         <source>flash.candidacy.sent</source>
-        <target>Votre candidature a bien été enregistrée.</target>
+        <target>Merci ! Votre candidature a bien été enregistrée.</target>
       </trans-unit>
       <trans-unit id="8c9372122ccf7e0e52081a676d2b3e4a" resname="flash.vote.sent">
         <source>flash.vote.sent</source>
-        <target>Votre vote a bien été enregistrée.</target>
+        <target>Merci ! Votre vote a bien été enregistré.</target>
       </trans-unit>
     </body>
   </file>

@@ -137,7 +137,7 @@ class ElectionVote
             $gender = $candidacy->getUser()->getGender();
             $count[$gender]++;
             if ($count[$gender] > $total/2) {
-                $context->buildViolation('noGenderParity')
+                $context->buildViolation('gender_parity')
                     ->atPath('candidacies')
                     ->addViolation();
 

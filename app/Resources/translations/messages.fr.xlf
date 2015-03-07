@@ -8,7 +8,7 @@
       </trans-unit>
       <trans-unit id="944612e4e393e4258f3dc72ed698454b" resname="link.profile">
         <source>link.profile</source>
-        <target>Profile</target>
+        <target>Profil</target>
       </trans-unit>
       <trans-unit id="c1b5259357d8223776200bf7ced8f1af" resname="link.settings">
         <source>link.settings</source>
@@ -219,16 +219,16 @@
       </trans-unit>
       <trans-unit id="8c1e7db9a4662e4e2960ee713f29b0ab" resname="help.clickCandidacyToSee">
         <source>help.clickCandidacyToSee</source>
-        <target>Cliquez sur la photo d'une candidature pour voir les détails.</target>
+        <target>Pour lire le texte d’un-e candidat-e, cliquez sur sa photo.</target>
       </trans-unit>
       <trans-unit id="039aafa2071a684e7b92556e5c67e462" resname="vote.information.%voteNumber%">
         <source>vote.information.%voteNumber%</source>
-        <target>Vous pouvez cocher %voteNumber% siège.|Vous pouvez cocher %voteNumber% sièges,
+        <target>Vous pouvez choisir %voteNumber% candidats.|Vous pouvez choisir %voteNumber% sièges,
           ou moins si vous souhaitez voter blanc.</target>
       </trans-unit>
       <trans-unit id="6fb450d8b82ec2e18f263baac4563af7" resname="vote.information.parity">
         <source>vote.information.parity</source>
-        <target>Vous devez cocher le même nombre d'hommes et de femmes.</target>
+        <target>Vous devez choisir le même nombre de femmes et d'hommes.</target>
       </trans-unit>
       <trans-unit id="38f7d06da09aeed5143d1c28d053f7b2" resname="vote.confirm">
         <source>vote.confirm</source>
@@ -248,14 +248,21 @@
       </trans-unit>
       <trans-unit id="4b00709be12d61dc448627c013196aa6" resname="vote.confirmation.information.blank">
         <source>vote.confirmation.information.blank</source>
-        <target>Vous avez coché moins de candidates et de candidats que de sièges à pouvoir. Si ce
+        <target>Vous avez choisi moins de candidates et de candidats que de sièges à pourvoir. Si ce
         n'est pas ce que vous souhaitez, vous pouvez modifier votre vote en cliquant sur Annuler.
-        Sinon, vous pouvez confirmer.</target>
+        Sinon vous pouvez confirmer en cochant la case « Je valide définitivement ce vote » puis en cliquant sur Valider.</target>
       </trans-unit>
       <trans-unit id="c322434cebbb24730ee120297eb32995" resname="login.instructions.registration">
         <source>login.instructions.registration</source>
-        <target>Pour voter, vous devez disposer d’abord d’un compte « Nous le Peuple ». Ce n’est pas encore le cas ?
-          Vous pouvez vous inscrire %link_start%en cliquant ici%link_end%.</target>
+        <target>Pour voter, vous devez disposer d’abord d’un compte « Nous le Peuple ». Ce n’est pas encore le cas ? Vous pouvez vous inscrire %link_start%en cliquant ici%link_end%.</target>
+      </trans-unit>
+      <trans-unit id="60019db4a87e08f4363f77ecc63362db" resname="vote.noCandidates">
+        <source>vote.noCandidates</source>
+        <target>Vous n'avez pas choisi de candidat-e.</target>
+      </trans-unit>
+      <trans-unit id="212d640a2e6dd339b764b4d445aa0bbf" resname="Invalid credentials.">
+        <source>Invalid credentials.</source>
+        <target>Mauvais identifiants.</target>
       </trans-unit>
     </body>
   </file>

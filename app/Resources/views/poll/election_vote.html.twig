@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form _self %}
+
 {% block stylesheets %}
   <style type="text/css">
+    .nlp-candidacy-list {
+      max-height: 600px;
+      overflow: auto;
+    }
     .nlp-candidacy {
       padding-bottom: 10px;
     }
@@ -19,6 +25,19 @@
     }
   </style>
 {% endblock %}
+
+{% block form_errors -%}
+  {% if errors|length > 0 -%}
+  <div class="alert alert-danger">
+  <ul class="list-unstyled">
+      {%- for error in errors -%}
+          <li><span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}</li>
+      {%- endfor -%}
+  </ul>
+  </div>
+  {%- endif %}
+{%- endblock form_errors %}
+
 
 {% block center_content %}
   <ol class="breadcrumb">
@@ -39,11 +58,13 @@
         <div class="alert alert-warning">
           {{ 'vote.information.%voteNumber%'|transchoice(voteNumber,{'%voteNumber%': voteNumber}) }}
           {% if parity %}{{ 'vote.information.parity'|trans }}{% endif %}
+          <br>
+          {{ 'help.clickCandidacyToSee'|trans }}
         </div>
         {{ form_start(form) }}
+          {{ form_errors(form) }}
+          {{ form_errors(form.candidacies) }}
           <div class="row nlp-candidacy-list">
-            {{ form_errors(form) }}
-            {{ form_errors(form.candidacies) }}
             {% for candidacyField in form.candidacies|shuffle %}
               {% set candidacy = form.candidacies.vars.choices[candidacyField.vars.value].data %}
               <div class="col-sm-3 col-xs-6 text-center nlp-candidacy">
@@ -64,7 +85,7 @@
               <h3>{{ 'election.noCandidates'|trans }}</h3>
             {% endfor %}
           </div>
-          <input type="submit" value="{{ 'label.validate'|trans }}" class="btn btn-primary btn-block">
+          <input type="submit" value="{{ 'label.validate'|trans }}" class="btn btn-primary btn-block btn-lg">
         {{ form_end(form) }}
       </div>
       <div class="col-md-6">
@@ -84,12 +105,16 @@
         $(this).addClass('active');
         var username = $(this).find('.nlp-candidacy-username').text();
         var description = $(this).find('.nlp-candidacy-description').html();
-        var href = $(this).find('a.nlp-candidacy-description-profile-link').attr('href');
+        var href = $(this).find('a.nlp-candidacy-profile-link').attr('href');
         $('#nlp-candidacy-username').html(username + ' <small><a href="' + href + '" target="_blank">{{ 'link.profile'|trans }}</a></small>');
         $('#nlp-candidacy-description').html(description);
       })
 
       var count = $('.nlp-candidacy .checkbox input:checkbox:checked').length;
+      $('.nlp-candidacy input:checkbox').not('#election_vote_confirmation').prop('disabled', false);
+      if (count >= {{ voteNumber }}) {
+        $('.nlp-candidacy input:checkbox').not(':checked').not('#election_vote_confirmation').prop('disabled', true);
+      }
 
       $('.nlp-candidacy .checkbox input:checkbox:checked').closest('.nlp-candidacy').addClass('selected');
       $('.nlp-candidacy .checkbox input:checkbox').change(function() {

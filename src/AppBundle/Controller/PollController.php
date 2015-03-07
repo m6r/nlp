@@ -123,6 +123,15 @@ class PollController extends Controller
         $parity = $this->get('app.election_ruler')->hasGenderParity($election);
 
         $vote = new ElectionVote($election, $request->getClientIp());
+        // Populate $vote with previous choices if user has cancelled from confirm page for example.
+        if ('GET' === $request->getMethod() && ($voteRequest = $this->get('session')->get('voteToConfirm'))) {
+            $previousForm = $this->createForm(new ElectionVoteType(), $vote, array(
+                'candidacies' => $election->getCandidacies(),
+                'voteNumber' => $voteNumber,
+            ));
+            $previousForm->handleRequest($voteRequest);
+        }
+
         $form = $this->createForm(new ElectionVoteType(), $vote, array(
             'candidacies' => $election->getCandidacies(),
             'voteNumber' => $voteNumber,

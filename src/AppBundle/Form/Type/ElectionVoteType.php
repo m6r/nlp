@@ -20,10 +20,13 @@ class ElectionVoteType extends AbstractType
                 'class' => 'AppBundle:Poll\Candidacy',
                 'choices' => $options['candidacies'],
                 'expanded' => true,
-                'multiple' => true,
+                'multiple' => ($options['voteNumber'] > 1),
                 'property' => 'user.username',
                 'constraints' => array(
-                    new Assert\Count(array('max' => $options['voteNumber'])),
+                    new Assert\Count(array(
+                        'max' => $options['voteNumber'],
+                        'maxMessage' => 'max_candidacies',
+                    )),
                 ),
             ));
     }
