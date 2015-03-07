@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity\Poll;
 
+use AppBundle\Entity\User;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -55,6 +56,14 @@ class ElectionVote
     private $ip;
 
     /**
+     * @var AppBundle\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="user_id")
+     */
+    private $voter;
+
+    /**
      * @var array
      *
      * @ORM\ManyToMany(targetEntity="Candidacy")
@@ -65,10 +74,11 @@ class ElectionVote
     /**
      * Constructor.
      */
-    public function __construct(Election $election, $ip)
+    public function __construct(Election $election, $ip, User $user)
     {
         $this->election = $election;
         $this->ip = $ip;
+        $this->voter = $user;
         $this->candidacies = new ArrayCollection();
     }
 
