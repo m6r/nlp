@@ -24,6 +24,9 @@ class ElectionRulerTest extends \PHPUnit_Framework_TestCase
         $this->rule1->expects($this->any())
             ->method('isAllowedToVote')
             ->will($this->returnValue(true));
+        $this->rule1->expects($this->any())
+            ->method('hasGenderParity')
+            ->will($this->returnValue(true));
 
         $this->criterias2 = array(
             'group3' => array('criteriaA', 'criteriaB'),
@@ -37,6 +40,9 @@ class ElectionRulerTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(false));
         $this->rule2->expects($this->any())
             ->method('isAllowedToVote')
+            ->will($this->returnValue(false));
+        $this->rule2->expects($this->any())
+            ->method('hasGenderParity')
             ->will($this->returnValue(false));
 
         $this->election1 = new Election();
@@ -70,10 +76,18 @@ class ElectionRulerTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function isAllowedToVote(User $user, Election $election)
+    public function testIsAllowedToVote()
     {
         $this->assertFalse(
             $this->ruler->isAllowedToVote($this->user, $this->election2)
+        );
+    }
+
+    public function testHasGenderParity()
+    {
+        $this->assertTrue(
+            $this->ruler->hasGenderParity($this->election1)
+            && !$this->ruler->hasGenderParity($this->election2)
         );
     }
 }
