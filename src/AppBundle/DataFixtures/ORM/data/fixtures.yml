@@ -7,7 +7,7 @@ AppBundle\Entity\User:
         url: "20%? <url()> :  "
         lastLogin: <dateTimeBetween('-200 days', 'now')>
         userIP: <ipv4()>
-        phoneNumber: "95%? <regexify('0[1-9][0-9]{8}')> : <regexify('\+(?!33)[0-9]{5,15}')>"
+        phoneNumber: "95%? <regexify('0[1-9][0-9]{8}')> : <regexify('\+[0-9]{8,15}')>"
         lastName: <lastName()>
         firstName: <firstName()>
         gender: "<randomElement(array('M', 'F'))>"
@@ -24,13 +24,16 @@ AppBundle\Entity\User:
         username: user
         level: normal
         password: <hashedPassword('user')>
-    users{1..100} (extends user):
+    users{1..200} (extends user):
         level: normal
 
 AppBundle\Entity\Poll\Election:
     election (template):
         group : default
         criteria: gender_parity
+    forbiddenElection (template):
+        group : default
+        criteria: forbidden
     electionFuture (extends election):
         name: futureElection
         description: futureElection
@@ -59,9 +62,37 @@ AppBundle\Entity\Poll\Election:
         closeCandidacyDate: <dateTimeBetween('-2 days', '-2 days')>
         openDate: <dateTimeBetween('-2 days', '-2 days')>
         closeDate: <dateTimeBetween('-1 days', '-1 days')>
+    electionForbiddenFuture (extends forbiddenElection):
+        name: futureForbiddenElection
+        description: futureForbiddenElection
+        openCandidacyDate: <dateTimeBetween('+1 days', '+1 days')>
+        closeCandidacyDate: <dateTimeBetween('+2 days', '+2 days')>
+        openDate: <dateTimeBetween('+2 days', '+2 days')>
+        closeDate: <dateTimeBetween('+3 days', '+3 days')>
+    electionForbiddenCandidacy (extends forbiddenElection):
+        name: candidacyForbiddenElection
+        description: candidacyForbiddenElection
+        openCandidacyDate: <dateTimeBetween('-1 days', '-1 days')>
+        closeCandidacyDate: <dateTimeBetween('+1 days', '+1 days')>
+        openDate: <dateTimeBetween('+1 days', '+1 days')>
+        closeDate: <dateTimeBetween('+2 days', '+2 days')>
+    electionForbiddenVote (extends forbiddenElection):
+        name: voteForbiddenElection
+        description: voteForbiddenElection
+        openCandidacyDate: <dateTimeBetween('-2 days', '+-2 days')>
+        closeCandidacyDate: <dateTimeBetween('-1 days', '-1 days')>
+        openDate: <dateTimeBetween('-1 days', '-1 days')>
+        closeDate: <dateTimeBetween('+1 days', '+1 days')>
+    electionForbiddenPast (extends forbiddenElection):
+        name: pastForbiddenElection
+        description: pastForbiddenElection
+        openCandidacyDate: <dateTimeBetween('-3 days', '+-3 days')>
+        closeCandidacyDate: <dateTimeBetween('-2 days', '-2 days')>
+        openDate: <dateTimeBetween('-2 days', '-2 days')>
+        closeDate: <dateTimeBetween('-1 days', '-1 days')>
 
 AppBundle\Entity\Poll\Candidacy:
-    candidacies{1..50}:
+    candidacies{1..100}:
         __construct: [@election*]
         user: @users<current()>
         hideIdentity: <boolean()>

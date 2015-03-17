@@ -28,7 +28,7 @@ class DefaultElectionRule implements ElectionRuleInterface
      */
     public function isAllowedToCandidate(User $user, Election $election)
     {
-        return true;
+        return 'gender_parity' === $election->getCriteria();
     }
 
     /**
@@ -36,7 +36,7 @@ class DefaultElectionRule implements ElectionRuleInterface
      */
     public function isAllowedToVote(User $user, Election $election)
     {
-        return true;
+        return 'gender_parity' === $election->getCriteria();
     }
 
     /**

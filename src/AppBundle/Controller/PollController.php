@@ -23,45 +23,35 @@ class PollController extends Controller
      */
     public function listPollsAction()
     {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_PROFILE_LOCKED')) {
+        $security = $this->get('security.authorization_checker');
+        if (!$security->isGranted('IS_PROFILE_LOCKED')) {
             return $this->redirect($this->generateUrl('profile_validate'));
         }
 
-        $criterias = array_merge_recursive(
-            $this->get('app.election_ruler')->getCandidateCriterias($this->getUser()),
-            $this->get('app.election_ruler')->getVoteCriterias($this->getUser())
-        );
-
         $em = $this->getDoctrine()->getManager();
 
+        $elections = $em->getRepository('AppBundle:Poll\Election')->findAllCurrent();
         $userElections = array();
-        foreach ($criterias as $groupName => $criteriaGroup) {
-            $result = $em->createQuery(
-                'SELECT e
-                FROM AppBundle:Poll\Election e
-                WHERE e.openCandidacyDate < CURRENT_TIMESTAMP()
-                AND e.closeDate > CURRENT_TIMESTAMP()
-                AND e.group = :groupName
-                AND e.criteria IN(:criteriaGroup)'
-            )->setParameter('groupName', $groupName)
-                ->setParameter('criteriaGroup', $criteriaGroup)
-                ->getResult();
-
-            if ($result) {
-                $userElections = array_merge($userElections, $result);
+        $otherElections = array();
+        foreach ($elections as $election) {
+            $grantVote = $security->isGranted('ELECTION_VOTE', $election);
+            $grantCandidate = $security->isGranted('ELECTION_CANDIDATE', $election);
+            if ($grantVote || $grantCandidate) {
+                $userElections[] = $election;
+            } else {
+                $otherElections[] = $election;
             }
         }
 
+        $pastElections = $em->getRepository('AppBundle:Poll\Election')->findAllPast();
+
         $otherPolls = $em->getRepository('AppBundle:Poll\Poll')->findAllCurrent();
-        $elections = $em->getRepository('AppBundle:Poll\Election')->findAllCurrent();
-        $otherElections = array_udiff($elections, $userElections, function ($a, $b) {
-            return $a->getId() === $b->getId();
-        });
 
         return $this->render('poll/list.html.twig', array(
             'userElections' => $userElections,
-            'otherPolls' => $otherPolls,
             'otherElections' => $otherElections,
+            'pastElections' => $pastElections,
+            'otherPolls' => $otherPolls,
         ));
     }
 

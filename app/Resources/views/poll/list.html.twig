@@ -49,11 +49,21 @@
           </div>
         {% endfor %}
       </div>
+  {% else %}
+    <p>
+      {{ 'placeholder.election.list.empty'|trans }}
+    </p>
   {% endfor %}
 
-  {% if otherElections is not empty %}<h1>{{ 'elections.listTitle.others'|trans }}</h1>{% endif %}
+  {% if otherElections is not empty %}<h1>{{ 'title.elections.list.others'|trans }}</h1>{% endif %}
   {% for election in otherElections %}
-    <a href="{{ path('election_show', {'id': election.id}) }}">{{ election.criteria }}</a>
+    <a href="{{ path('election_show', {'id': election.id}) }}">{{ election.name }}</a>
+    {% if not loop.last %} - {% endif %}
+  {% endfor %}
+
+  {% if pastElections is not empty %}<h1>{{ 'title.elections.list.past'|trans }}</h1>{% endif %}
+  {% for election in pastElections %}
+    <a href="{{ path('election_show', {'id': election.id}) }}">{{ election.name }}</a>
     {% if not loop.last %} - {% endif %}
   {% endfor %}
 {% endblock %}

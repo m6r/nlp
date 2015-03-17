@@ -260,9 +260,21 @@
         <source>vote.noCandidates</source>
         <target>Vous n'avez pas choisi de candidat-e.</target>
       </trans-unit>
-      <trans-unit id="212d640a2e6dd339b764b4d445aa0bbf" resname="Invalid credentials.">
+      <trans-unit id="a7276f5dc8bc5faf85ddb5d54769c189" resname="Invalid credentials.">
         <source>Invalid credentials.</source>
         <target>Mauvais identifiants.</target>
+      </trans-unit>
+      <trans-unit id="3e79b87990335e0154a10e3bbc5df33e" resname="placeholder.election.list.empty">
+        <source>placeholder.election.list.empty</source>
+        <target>Pas d'élections en cours.</target>
+      </trans-unit>
+      <trans-unit id="393dc2a90e16f482bc4c5f0b5e2278da" resname="title.elections.list.others">
+        <source>title.elections.list.others</source>
+        <target>Autres élections</target>
+      </trans-unit>
+      <trans-unit id="e399a072c1a2d2aba240b7b869de6c39" resname="title.elections.list.past">
+        <source>title.elections.list.past</source>
+        <target>Élections passées</target>
       </trans-unit>
     </body>
   </file>

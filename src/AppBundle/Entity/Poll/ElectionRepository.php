@@ -16,4 +16,15 @@ class ElectionRepository extends EntityRepository
         )
         ->getResult();
     }
+
+    public function findAllPast()
+    {
+        return $this->getEntityManager()->createQuery(
+            'SELECT election
+            FROM AppBundle:Poll\Election election
+            WHERE election.closeDate < CURRENT_TIMESTAMP()
+            ORDER BY election.closeDate ASC'
+        )
+        ->getResult();
+    }
 }
