@@ -1,7 +1,6 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
-parameters:
-#    parameter_name: value
+# Import admin services
+imports:
+    - { resource: admin.yml }
 
 services:
     app.sha256_pligg_encoder:
@@ -11,6 +10,10 @@ services:
         arguments: [%table_prefix%]
         tags:
             - { name: doctrine.event_listener, event: loadClassMetadata }
+    app.category_id_listener:
+        class: AppBundle\Listener\CategoryIdListener
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
     app.election_ruler:
         class: AppBundle\Poll\ElectionRuler
     app.election_ruler.default_rules:
@@ -20,6 +23,11 @@ services:
     app.security.access.election_rule_voter:
         class:     AppBundle\Security\Authorization\Voter\ElectionRuleVoter
         arguments: [@app.election_ruler]
+        public:    false
+        tags:
+            - { name: security.voter }
+    app.security.access.poll_voter:
+        class:     AppBundle\Security\Authorization\Voter\PollVoter
         public:    false
         tags:
             - { name: security.voter }

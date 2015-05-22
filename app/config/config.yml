@@ -84,3 +84,11 @@ stof_doctrine_extensions:
     orm:
         default:
             timestampable: true
+            tree: true
+            sluggable: true
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]

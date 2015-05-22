@@ -10,6 +10,8 @@
       <tr><td>{{ poll.name }}</td> <td>{{ poll.candidacies|length }}</td></tr>
     {% endfor %}
   </table>
+
+  <a href="/admin/sonata">{{ 'link.sonata.admin'|trans }}</a>
 {% endblock %}
 
 {% block javascript_footer %}

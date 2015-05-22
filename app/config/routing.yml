@@ -8,3 +8,12 @@ logout:
 lexik_translation_edition:
     resource: "@LexikTranslationBundle/Resources/config/routing.yml"
     prefix:   /admin/translations
+
+sonata_admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin/sonata
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin/sonata

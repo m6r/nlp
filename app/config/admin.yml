@@ -1,0 +1,25 @@
+services:
+    sonata.admin.poll.poll:
+        class: AppBundle\Admin\Poll\PollAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Polls", label: "Poll" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Poll\Poll
+            - ~
+    sonata.admin.poll.question:
+        class: AppBundle\Admin\Poll\PollQuestionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Polls", label: "Question" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Poll\PollQuestion
+            - ~
+    sonata.admin.poll.Choice:
+        class: AppBundle\Admin\Poll\PollChoiceAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Polls", label: "Choice" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Poll\PollChoice
+            - ~

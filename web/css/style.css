@@ -1,5 +1,24 @@
 @charset "UTF-8";
 /* CSS Document */
+
+
+body {
+  background-color: #EEF;
+}
+
+.container {
+  background-color: #FFF;
+}
+
+.content-header {
+  color: #FFF;
+}
+
+.content-header > h1 {
+  padding: 20px;
+  background-color: #FCB729;
+}
+
 a {
   color: #FCB729;
   text-decoration: none;

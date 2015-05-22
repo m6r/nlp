@@ -21,7 +21,9 @@
         "stof/doctrine-extensions-bundle": "~1.1",
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "nelmio/alice": "~1.7",
-        "fzaninotto/faker": "@dev"
+        "fzaninotto/faker": "@dev",
+        "sonata-project/admin-bundle": "~2.3",
+        "sonata-project/doctrine-orm-admin-bundle": "^2.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
