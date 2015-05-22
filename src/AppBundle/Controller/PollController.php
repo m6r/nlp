@@ -5,7 +5,10 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Poll\Candidacy;
 use AppBundle\Entity\Poll\Election;
 use AppBundle\Entity\Poll\ElectionVote;
+use AppBundle\Entity\Poll\PollVote;
+use AppBundle\Entity\Poll\Poll;
 use AppBundle\Form\Type\CandidacyType;
+use AppBundle\Form\Type\PollVoteType;
 use AppBundle\Form\Type\ElectionVoteType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -45,13 +48,13 @@ class PollController extends Controller
 
         $pastElections = $em->getRepository('AppBundle:Poll\Election')->findAllPast();
 
-        $otherPolls = $em->getRepository('AppBundle:Poll\Poll')->findAllCurrent();
+        $currentPolls = $em->getRepository('AppBundle:Poll\Poll')->findAllCurrent();
 
         return $this->render('poll/list.html.twig', array(
             'userElections' => $userElections,
             'otherElections' => $otherElections,
             'pastElections' => $pastElections,
-            'otherPolls' => $otherPolls,
+            'userPolls' => $currentPolls,
         ));
     }
 
@@ -59,7 +62,7 @@ class PollController extends Controller
      * @Route("/election/{id}/show", name="election_show", requirements={"id": "\d+"})
      * @Security("is_granted('IS_PROFILE_LOCKED')")
      */
-    public function showElectionAction(Election $election)
+    public function electionShowAction(Election $election)
     {
         $voteNumber = $this->get('app.election_ruler')->getVoteNumber($this->getUser(), $election);
 
@@ -73,7 +76,7 @@ class PollController extends Controller
      * @Route("/election/{id}/candidate", name="election_candidate", requirements={"id": "\d+"})
      * @Security("is_granted('IS_PROFILE_LOCKED') && is_granted('ELECTION_CANDIDATE', election)")
      */
-    public function doCandidateAction(Election $election, Request $request)
+    public function electionDoCandidateAction(Election $election, Request $request)
     {
         $user = $this->getUser();
         $candidacy = new Candidacy($election);
@@ -107,7 +110,7 @@ class PollController extends Controller
      * @Route("/election/{id}/vote", name="election_vote", requirements={"id": "\d+"})
      * @Security("is_granted('IS_PROFILE_LOCKED') && is_granted('ELECTION_VOTE', election)")
      */
-    public function doVoteAction(Election $election, Request $request)
+    public function electionDoVoteAction(Election $election, Request $request)
     {
         $voteNumber = $this->get('app.election_ruler')->getVoteNumber($this->getUser(), $election);
         $parity = $this->get('app.election_ruler')->hasGenderParity($election);
@@ -147,7 +150,7 @@ class PollController extends Controller
      * @Route("/election/{id}/vote/confirm", name="election_vote_confirm", requirements={"id": "\d+"})
      * @Security("is_granted('IS_PROFILE_LOCKED') && is_granted('ELECTION_VOTE', election)")
      */
-    public function voteConfirmAction(Election $election, Request $request)
+    public function electionVoteConfirmAction(Election $election, Request $request)
     {
         if (!($voteRequest = $this->get('session')->get('voteToConfirm'))) {
             return $this->redirect($this->generateUrl('election_vote', array('id' => $election->getId())));
@@ -197,6 +200,40 @@ class PollController extends Controller
             'election' => $election,
             'voteNumber' => $voteNumber,
             'vote' => $vote,
+        ));
+    }
+
+    /**
+     * @Route("/{id}/vote", name="poll_vote", requirements={"id": "\d+"})
+     * @Security("is_granted('IS_PROFILE_LOCKED') && is_granted('POLL_VOTE', poll)")
+     */
+    public function pollVoteAction(Poll $poll, Request $request)
+    {
+        $vote = new PollVote($poll, $request->getClientIp(), $this->getUser());
+
+        $form = $this->createForm(new PollVoteType(), $vote);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $poll->addVoter($this->getUser());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($poll);
+            $em->persist($vote);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                $this->get('translator')->trans('flash.vote.sent', array(), 'flash')
+            );
+
+            return $this->redirect($this->generateUrl('polls'));
+        }
+
+        return $this->render('poll/poll_vote.html.twig', array(
+            'form' => $form->createView(),
+            'poll' => $poll
         ));
     }
 }

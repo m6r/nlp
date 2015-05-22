@@ -6,26 +6,16 @@ use AppBundle\Poll\ElectionRuler;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class ElectionRuleVoter implements VoterInterface
+class PollVoter implements VoterInterface
 {
-    /**
-     * @var ElectionRuler
-     */
-    private $electionRuler;
-
-    public function __construct(ElectionRuler $electionRuler)
-    {
-        $this->electionRuler = $electionRuler;
-    }
-
     public function supportsAttribute($attribute)
     {
-        return 0 === strpos($attribute, 'ELECTION_');
+        return 0 === strpos($attribute, 'POLL_');
     }
 
     public function supportsClass($class)
     {
-        $supportedClass = 'AppBundle\Entity\Poll\Election';
+        $supportedClass = 'AppBundle\Entity\Poll\Poll';
 
         return $supportedClass === $class || is_subclass_of($class, $supportedClass);
     }
@@ -61,24 +51,12 @@ class ElectionRuleVoter implements VoterInterface
         }
 
         switch ($attribute) {
-            case 'ELECTION_CANDIDATE':
-                $allowed = $this->electionRuler->isAllowedtoCandidate($user, $election);
-                $opened = (new \DateTime() > $election->getOpenCandidacyDate());
-                $closed = (new \DateTime() > $election->getCloseCandidacyDate());
-                $hasCandidated = $election->isCandidate($user);
-
-                if ($allowed && $opened && !$closed && !$hasCandidated) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
-                break;
-
-            case 'ELECTION_VOTE':
-                $allowed = $this->electionRuler->isAllowedtoVote($user, $election);
+            case 'POLL_VOTE':
                 $opened = (new \DateTime() > $election->getOpenDate());
                 $closed = (new \DateTime() > $election->getCloseDate());
                 $hasVoted = $election->hasVoted($user);
 
-                if ($allowed && $opened && !$closed && !$hasVoted) {
+                if ($opened && !$closed && !$hasVoted) {
                     return VoterInterface::ACCESS_GRANTED;
                 }
                 break;

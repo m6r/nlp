@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block center_content %}
+  {{ form_start(form) }}
+    {{ form_errors(form.questionVotes) }}
+    {{ form_widget(form.questionVotes) }}
+
+    <input type="submit" value="{{ 'label.vote'|trans }}" class="btn btn-primary" />
+  {{ form_end(form)}}
+{% endblock %}

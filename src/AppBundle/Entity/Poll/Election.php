@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity()
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Poll\ElectionRepository")
  */
-class Election extends GenericPoll
+class Election extends AbstractPoll
 {
     /**
      * @ORM\Column(type="datetime")
@@ -41,6 +41,7 @@ class Election extends GenericPoll
 
     public function __construct()
     {
+        parent::__construct();
         $this->candidacies = new ArrayCollection();
     }
 

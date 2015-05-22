@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @UniqueEntity({"group", "criteria"})
  */
-abstract class GenericPoll
+abstract class AbstractPoll
 {
     /**
      * @var integer
@@ -96,8 +96,8 @@ abstract class GenericPoll
     private $group;
 
     /**
-     * A unique (within the group) identfier used by the auth checker. For example
-     * the name of the region for a regional election.
+     * An identifier (not necessarily unique) used by the auth checker. For
+     * example the name of the region for a regional election.
      *
      * @var string
      *
@@ -109,18 +109,9 @@ abstract class GenericPoll
     private $criteria;
 
     /**
-     * All choices offered for the poll.
-     *
-     * @var array
-     *
-     * @ORM\OneToMany(targetEntity="Choice", mappedBy="election")
-     */
-    protected $choices;
-
-    /**
      * All user who voted for the poll.
      *
-     * @var array
+     * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinTable("polls_voters", inverseJoinColumns={
@@ -131,7 +122,6 @@ abstract class GenericPoll
 
     public function __construct()
     {
-        $this->choices = new ArrayCollection();
         $this->voter = new ArrayCollection();
     }
 
@@ -284,5 +274,14 @@ abstract class GenericPoll
     public function hasVoted(User $user)
     {
         return $this->voters->contains($user);
+    }
+
+    /**
+     * To string
+     * @return string the name
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 }

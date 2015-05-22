@@ -41,6 +41,16 @@
   <!-- END CATEGORIES -->
 
   <div class="container">
+    <div class="row">
+      {% set _block = block('center_content_title') %}
+      {% if _block is not empty %}
+        <div class="col-md-12 content-header">
+          <h1>
+            {{ _block|raw }}
+          </h1>
+        </div>
+      {% endif %}
+    </div>
     <section id="maincontent" class="text-justify">
       <div class="row">
         <div class="col-md-12">

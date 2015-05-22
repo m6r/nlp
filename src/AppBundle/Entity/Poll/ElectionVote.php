@@ -39,9 +39,9 @@ class ElectionVote
     private $updated;
 
     /**
-     * @ORM\ManyToOne(targetEntity="GenericPoll")
+     * @ORM\ManyToOne(targetEntity="Election")
      *
-     * @var Poll
+     * @var Election
      */
     private $election;
 

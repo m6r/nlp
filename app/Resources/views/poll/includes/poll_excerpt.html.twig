@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>
+      {{ poll.name }}
+    </h2>
+    <p>
+      {{ poll.description}}
+    </p>
+    <div class="col-md-12 text-center">
+    {% if is_granted('POLL_VOTE', poll) %}
+      <a href="{{ path('poll_vote', {'id': poll.id}) }}" class="btn btn-primary btn-lg">
+        {{ 'label.vote'|trans }}
+      </a>
+    {% endif %}
+  </div>
+  </div>
+</div>

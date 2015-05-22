@@ -4,6 +4,7 @@ namespace VoteAssemblee2015Bundle\Poll;
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\Poll\Election;
+use AppBundle\Entity\Poll\AbstractPoll;
 use AppBundle\Poll\ElectionRuleInterface;
 
 class ElectionRule implements ElectionRuleInterface
@@ -67,7 +68,7 @@ class ElectionRule implements ElectionRuleInterface
     /**
      * @inheritdoc
      */
-    public function isAllowedToVote(User $user, Election $election)
+    public function isAllowedToVote(User $user, AbstractPoll $election)
     {
         return $this->isAllowedToCandidate($user, $election);
     }

@@ -4,6 +4,7 @@ namespace AppBundle\Poll;
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\Poll\Election;
+use AppBundle\Entity\Poll\AbstractPoll;
 
 class DefaultElectionRule implements ElectionRuleInterface
 {
@@ -34,7 +35,7 @@ class DefaultElectionRule implements ElectionRuleInterface
     /**
      * @inheritdoc
      */
-    public function isAllowedToVote(User $user, Election $election)
+    public function isAllowedToVote(User $user, AbstractPoll $election)
     {
         return 'gender_parity' === $election->getCriteria();
     }
