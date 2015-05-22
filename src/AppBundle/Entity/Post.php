@@ -44,7 +44,7 @@ class Post
     /**
      * @ORM\Column(type="integer", name="link_author", options={"default"=0})
      */
-    private $user;
+    private $author;
 
     /**
      * @ORM\Column(type="string", name="link_status", options={"default"="discard"})
@@ -59,33 +59,33 @@ class Post
     /**
      * @ORM\Column(type="integer", name="link_votes", options={"default"=0})
      */
-    private $score;
+    private $score = 0;
 
     /**
      * @ORM\Column(type="integer", name="link_likes", nullable=true)
      */
-    private $likes;
+    private $likes = 0;
 
     /**
      * @ORM\Column(type="integer", name="link_reports", options={"default"=0})
      */
-    private $dislikes;
+    private $dislikes = 0;
 
     /**
      * @ORM\Column(type="integer", name="link_comments", options={"default"=0})
      */
-    private $comments;
+    private $commentsNumber = 0;
 
     /**
      * @ORM\Column(type="integer", name="link_debate_score", nullable=true)
      */
-    private $debateScore;
+    private $debateScore = 0;
 
     /**
      * @deprecated
      * @ORM\Column(type="decimal", precision=10, scale=2, name="link_karma", options={"default"=0.00})
      */
-    private $karma;
+    private $karma = '0';
 
     /**
      * @Gedmo\Timestampable(on="update")
@@ -100,6 +100,10 @@ class Post
     private $created;
 
     /**
+     * Pligg distinguish 'new' post from 'published' post (by default you need 5 likes
+     * to be published). We don't use this so published is always equal to created.
+     * @deprecated
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", name="link_published_date", options={"default"="0000-00-00 00:00:00"})
      */
     private $published;
@@ -113,13 +117,13 @@ class Post
      * @deprecated
      * @ORM\Column(type="integer", name="link_lang", options={"default"=1})
      */
-    private $lang;
+    private $lang = 1;
 
     /**
      * @deprecated
      * @ORM\Column(length=200, name="link_url", options={"default"=""})
      */
-    private $url;
+    private $url = '';
 
     /**
      * @deprecated
@@ -151,114 +155,122 @@ class Post
     /**
      * @ORM\Column(type="text", name="link_tags", nullable=true)
      */
-    private $tags;
+    private $tags = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field1", options={"default"=""})
      */
-    private $link_field1;
+    private $link_field1 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field2", options={"default"=""})
      */
-    private $link_field2;
+    private $link_field2 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field3", options={"default"=""})
      */
-    private $link_field3;
+    private $link_field3 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field4", options={"default"=""})
      */
-    private $link_field4;
+    private $link_field4 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field5", options={"default"=""})
      */
-    private $link_field5;
+    private $link_field5 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field6", options={"default"=""})
      */
-    private $link_field6;
+    private $link_field6 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field7", options={"default"=""})
      */
-    private $link_field7;
+    private $link_field7 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field8", options={"default"=""})
      */
-    private $link_field8;
+    private $link_field8 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field9", options={"default"=""})
      */
-    private $link_field9;
+    private $link_field9 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field10", options={"default"=""})
      */
-    private $link_field10;
+    private $link_field10 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field11", options={"default"=""})
      */
-    private $link_field11;
+    private $link_field11 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field12", options={"default"=""})
      */
-    private $link_field12;
+    private $link_field12 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field13", options={"default"=""})
      */
-    private $link_field13;
+    private $link_field13 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field14", options={"default"=""})
      */
-    private $link_field14;
+    private $link_field14 = '';
 
     /**
      * @deprecated
      * @ORM\Column(length=255, name="link_field15", options={"default"=""})
      */
-    private $link_field15;
+    private $link_field15 = '';
 
     /**
      * @ORM\Column(type="integer", name="link_group_id", options={"default"=0})
      */
-    private $group;
+    private $group = 0;
 
     /**
      * @deprecated
      * @ORM\Column(type="string", name="link_group_status", options={"default"="new"})
      */
-    private $groupStatus;
+    private $groupStatus = 'new';
 
     /**
      * @deprecated
      * @ORM\Column(type="integer", name="link_out", options={"default"=0})
      */
-    private $out;
+    private $out = 0;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->randkey = rand(10000, 10000000);
+    }
 
     /**
      * Get id.
@@ -271,27 +283,27 @@ class Post
     }
 
     /**
-     * Set user.
+     * Set author.
      *
      * @param integer $user
      *
      * @return Post
      */
-    public function setUser($user)
+    public function setAuthor($author)
     {
-        $this->user = $user;
+        $this->author = $author;
 
         return $this;
     }
 
     /**
-     * Get user.
+     * Get author.
      *
      * @return integer
      */
-    public function getUser()
+    public function getAuthor()
     {
-        return $this->user;
+        return $this->author;
     }
 
     /**
@@ -319,20 +331,6 @@ class Post
     }
 
     /**
-     * Set randkey.
-     *
-     * @param integer $randkey
-     *
-     * @return Post
-     */
-    public function setRandkey($randkey)
-    {
-        $this->randkey = $randkey;
-
-        return $this;
-    }
-
-    /**
      * Get randkey.
      *
      * @return integer
@@ -340,20 +338,6 @@ class Post
     public function getRandkey()
     {
         return $this->randkey;
-    }
-
-    /**
-     * Set score.
-     *
-     * @param integer $score
-     *
-     * @return Post
-     */
-    public function setScore($score)
-    {
-        $this->score = $score;
-
-        return $this;
     }
 
     /**
@@ -367,20 +351,6 @@ class Post
     }
 
     /**
-     * Set likes.
-     *
-     * @param integer $likes
-     *
-     * @return Post
-     */
-    public function setLikes($likes)
-    {
-        $this->likes = $likes;
-
-        return $this;
-    }
-
-    /**
      * Get likes.
      *
      * @return integer
@@ -388,20 +358,6 @@ class Post
     public function getLikes()
     {
         return $this->likes;
-    }
-
-    /**
-     * Set dislikes.
-     *
-     * @param integer $dislikes
-     *
-     * @return Post
-     */
-    public function setDislikes($dislikes)
-    {
-        $this->dislikes = $dislikes;
-
-        return $this;
     }
 
     /**
@@ -415,41 +371,13 @@ class Post
     }
 
     /**
-     * Set comments.
-     *
-     * @param integer $comments
-     *
-     * @return Post
-     */
-    public function setComments($comments)
-    {
-        $this->comments = $comments;
-
-        return $this;
-    }
-
-    /**
      * Get comments.
      *
      * @return integer
      */
-    public function getComments()
+    public function getCommentsNumber()
     {
-        return $this->comments;
-    }
-
-    /**
-     * Set debateScore.
-     *
-     * @param integer $debateScore
-     *
-     * @return Post
-     */
-    public function setDebateScore($debateScore)
-    {
-        $this->debateScore = $debateScore;
-
-        return $this;
+        return $this->commentsNumber;
     }
 
     /**
@@ -463,44 +391,6 @@ class Post
     }
 
     /**
-     * Set karma.
-     *
-     * @param string $karma
-     *
-     * @return Post
-     */
-    public function setKarma($karma)
-    {
-        $this->karma = $karma;
-
-        return $this;
-    }
-
-    /**
-     * Get karma.
-     *
-     * @return string
-     */
-    public function getKarma()
-    {
-        return $this->karma;
-    }
-
-    /**
-     * Set updated.
-     *
-     * @param \DateTime $updated
-     *
-     * @return Post
-     */
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
-
-        return $this;
-    }
-
-    /**
      * Get updated.
      *
      * @return \DateTime
@@ -511,20 +401,6 @@ class Post
     }
 
     /**
-     * Set created.
-     *
-     * @param \DateTime $created
-     *
-     * @return Post
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
      * Get created.
      *
      * @return \DateTime
@@ -532,30 +408,6 @@ class Post
     public function getCreated()
     {
         return $this->created;
-    }
-
-    /**
-     * Set published.
-     *
-     * @param \DateTime $published
-     *
-     * @return Post
-     */
-    public function setPublished($published)
-    {
-        $this->published = $published;
-
-        return $this;
-    }
-
-    /**
-     * Get published.
-     *
-     * @return \DateTime
-     */
-    public function getPublished()
-    {
-        return $this->published;
     }
 
     /**
@@ -583,78 +435,6 @@ class Post
     }
 
     /**
-     * Set lang.
-     *
-     * @param integer $lang
-     *
-     * @return Post
-     */
-    public function setLang($lang)
-    {
-        $this->lang = $lang;
-
-        return $this;
-    }
-
-    /**
-     * Get lang.
-     *
-     * @return integer
-     */
-    public function getLang()
-    {
-        return $this->lang;
-    }
-
-    /**
-     * Set url.
-     *
-     * @param string $url
-     *
-     * @return Post
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Get url.
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * Set urlTitle.
-     *
-     * @param string $urlTitle
-     *
-     * @return Post
-     */
-    public function setUrlTitle($urlTitle)
-    {
-        $this->urlTitle = $urlTitle;
-
-        return $this;
-    }
-
-    /**
-     * Get urlTitle.
-     *
-     * @return string
-     */
-    public function getUrlTitle()
-    {
-        return $this->urlTitle;
-    }
-
-    /**
      * Set title.
      *
      * @param string $title
@@ -679,20 +459,6 @@ class Post
     }
 
     /**
-     * Set slug.
-     *
-     * @param string $slug
-     *
-     * @return Post
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
      * Get slug.
      *
      * @return string
@@ -712,6 +478,7 @@ class Post
     public function setContent($content)
     {
         $this->content = $content;
+        $this->summary = substr($content, 0, 600);
 
         return $this;
     }
@@ -724,20 +491,6 @@ class Post
     public function getContent()
     {
         return $this->content;
-    }
-
-    /**
-     * Set summary.
-     *
-     * @param string $summary
-     *
-     * @return Post
-     */
-    public function setSummary($summary)
-    {
-        $this->summary = $summary;
-
-        return $this;
     }
 
     /**
@@ -796,53 +549,5 @@ class Post
     public function getGroup()
     {
         return $this->group;
-    }
-
-    /**
-     * Set groupStatus.
-     *
-     * @param string $groupStatus
-     *
-     * @return Post
-     */
-    public function setGroupStatus($groupStatus)
-    {
-        $this->groupStatus = $groupStatus;
-
-        return $this;
-    }
-
-    /**
-     * Get groupStatus.
-     *
-     * @return string
-     */
-    public function getGroupStatus()
-    {
-        return $this->groupStatus;
-    }
-
-    /**
-     * Set out.
-     *
-     * @param integer $out
-     *
-     * @return Post
-     */
-    public function setOut($out)
-    {
-        $this->out = $out;
-
-        return $this;
-    }
-
-    /**
-     * Get out.
-     *
-     * @return integer
-     */
-    public function getOut()
-    {
-        return $this->out;
     }
 }
