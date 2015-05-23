@@ -41,7 +41,7 @@ class PollQuestionVote
     private $question;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(PollVote $vote, PollQuestion $question)
     {

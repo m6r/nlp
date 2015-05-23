@@ -14,7 +14,7 @@ class PollQuestionAdmin extends Admin
             ->add('text')
             ->add('poll')
             ->add('choices', 'sonata_type_collection', array(), array(
-                'edit' => 'inline'
+                'edit' => 'inline',
             ))
         ;
     }

@@ -24,7 +24,7 @@ class PollQuestionVoteType extends AbstractType
                 'choices' => $question->getChoices(),
                 'expanded' => true,
                 'multiple' => false,
-                'property' => 'description'
+                'property' => 'description',
             ));
         });
     }

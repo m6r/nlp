@@ -35,6 +35,7 @@ class Category
     /**
      * For a weird reason the category table in pligg has to ID, the auto id and this column.
      * This column has always the same value as category__auto_id.
+     *
      * @ORM\Column(type="integer", name="category_id", options={"default"=0})
      */
     private $legacyId = '0';
@@ -48,6 +49,7 @@ class Category
 
     /**
      * Just to define a default value for the column so it match pligg schema.
+     *
      * @ORM\Column(type="integer", name="category_parent", options={"default"=0})
      */
     private $parentId;
@@ -91,7 +93,8 @@ class Category
     private $order = '0';
 
     /**
-     * Description
+     * Description.
+     *
      * @ORM\Column(type="string", name="category_desc")
      */
     private $description;
@@ -114,14 +117,16 @@ class Category
     private $authorGroup = '';
 
     /**
-     * Number of votes to publish
+     * Number of votes to publish.
+     *
      * @deprecated
      * @ORM\Column(type="string", length=4, name="category_votes", options={"default"=""})
      */
     private $votes = '';
 
     /**
-     * Karma to publish
+     * Karma to publish.
+     *
      * @deprecated
      * @ORM\Column(type="string", length=4, name="category_karma", options={"default"=""})
      */
@@ -147,6 +152,7 @@ class Category
 
     /**
      * Update legacy ID and return false if it needs to be persisted again.
+     *
      * @return boolean
      */
     public function updateLegacyId()

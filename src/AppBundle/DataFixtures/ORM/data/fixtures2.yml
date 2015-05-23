@@ -142,4 +142,3 @@ AppBundle\Entity\Poll\PollChoice:
         question: @question*
         name: <text(60)>
         description: <text(500)>
-

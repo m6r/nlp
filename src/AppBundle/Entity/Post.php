@@ -102,6 +102,7 @@ class Post
     /**
      * Pligg distinguish 'new' post from 'published' post (by default you need 5 likes
      * to be published). We don't use this so published is always equal to created.
+     *
      * @deprecated
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", name="link_published_date", options={"default"="0000-00-00 00:00:00"})
@@ -265,7 +266,7 @@ class Post
     private $out = 0;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {

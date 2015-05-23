@@ -5,7 +5,6 @@ namespace AppBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PollVoteType extends AbstractType
 {
@@ -18,7 +17,7 @@ class PollVoteType extends AbstractType
         $builder->add('questionVotes', 'collection', array(
             'type' => new PollQuestionVoteType(),
             'options' => array('label' => ' '),
-            'label' => ' '
+            'label' => ' ',
         ));
     }
 

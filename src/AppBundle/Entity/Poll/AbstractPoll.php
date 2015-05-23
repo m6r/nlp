@@ -277,7 +277,8 @@ abstract class AbstractPoll
     }
 
     /**
-     * To string
+     * To string.
+     *
      * @return string the name
      */
     public function __toString()

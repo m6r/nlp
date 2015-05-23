@@ -233,7 +233,7 @@ class PollController extends Controller
 
         return $this->render('poll/poll_vote.html.twig', array(
             'form' => $form->createView(),
-            'poll' => $poll
+            'poll' => $poll,
         ));
     }
 }
