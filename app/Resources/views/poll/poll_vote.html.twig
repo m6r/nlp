@@ -1,6 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% block center_content_title %}
+  {{ poll.name }}
+{% endblock %}
+
 {% block center_content %}
+  <p>
+    {{ poll.description }}
+  </p>
+
+  <hr>
+
   {{ form_start(form) }}
     {{ form_errors(form.questionVotes) }}
     {{ form_widget(form.questionVotes) }}
