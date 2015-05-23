@@ -22,6 +22,7 @@
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "nelmio/alice": "~1.7",
         "fzaninotto/faker": "@dev",
+        "knplabs/knp-markdown-bundle": "~1.3",
         "sonata-project/admin-bundle": "~2.3",
         "sonata-project/doctrine-orm-admin-bundle": "^2.3"
     },

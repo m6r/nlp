@@ -1,12 +1,39 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form _self %}
+
+{% use 'bootstrap_3_layout.html.twig' with form_label as base_form_label %}
+
+{% block form_label -%}
+  {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' control-label')|trim}) -%}
+  {% if label is not sameas(false) -%}
+    {% if not compound -%}
+      {% set label_attr = label_attr|merge({'for': id}) %}
+    {%- endif %}
+    {% if required -%}
+      {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+    {%- endif %}
+    {% if label is empty -%}
+      {%- if label_format is not empty -%}
+        {% set label = label_format|replace({
+            '%name%': name,
+            '%id%': id,
+        }) %}
+      {%- else -%}
+        {% set label = name|humanize %}
+      {%- endif -%}
+    {%- endif -%}
+    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain)|markdown|raw }}</label>
+  {%- endif -%}
+{%- endblock form_label %}
+
 {% block center_content_title %}
   {{ poll.name }}
 {% endblock %}
 
 {% block center_content %}
   <p>
-    {{ poll.description }}
+    {{ poll.description|markdown }}
   </p>
 
   <hr>

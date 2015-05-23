@@ -211,7 +211,7 @@ class PollController extends Controller
     {
         $vote = new PollVote($poll, $request->getClientIp(), $this->getUser());
 
-        $form = $this->createForm(new PollVoteType(), $vote);
+        $form = $this->createForm(new PollVoteType($this->get('markdown.parser')), $vote);
 
         $form->handleRequest($request);
 
