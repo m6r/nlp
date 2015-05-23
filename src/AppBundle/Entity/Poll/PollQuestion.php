@@ -155,9 +155,10 @@ class PollQuestion
      *
      * @return PollQuestion
      */
-    public function addChoice(PollChoice $choices)
+    public function addChoice(PollChoice $choice)
     {
-        $this->choices[] = $choices;
+        $this->choices[] = $choice;
+        $choice->setQuestion($this);
 
         return $this;
     }
@@ -165,9 +166,9 @@ class PollQuestion
     /**
      * Remove choices.
      *
-     * @param PollChoice $choices
+     * @param PollChoice $choice
      */
-    public function removeChoice(PollChoice $choices)
+    public function removeChoice(PollChoice $choice)
     {
         $this->choices->removeElement($choices);
     }

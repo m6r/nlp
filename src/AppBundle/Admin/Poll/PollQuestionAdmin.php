@@ -35,4 +35,19 @@ class PollQuestionAdmin extends Admin
             ->add('poll')
         ;
     }
+
+    public function prePersist($pollQuestion)
+    {
+        $this->preUpdate($pollQuestion);
+    }
+
+    public function preUpdate($pollQuestion)
+    {
+        $choices = $pollQuestion->getChoices();
+        if (count($choices) > 0) {
+            foreach ($choices as $choice) {
+                $choice->setQuestion($pollQuestion);
+            }
+        }
+    }
 }
