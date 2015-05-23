@@ -15,8 +15,6 @@ class PollAdmin extends Admin
             ->add('description')
             ->add('openDate')
             ->add('closeDate')
-            ->add('group', null, array('disabled' => true, 'empty_data' => 'default'))
-            ->add('criteria', null, array('disabled' => true, 'empty_data' => 'default'))
         ;
     }
 

@@ -26,6 +26,8 @@ class Poll extends AbstractPoll
     public function __construct()
     {
         $this->questions = new ArrayCollection();
+        $this->setGroup('default');
+        $this->setCriteria('default');
     }
 
     /**

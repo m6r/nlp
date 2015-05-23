@@ -14,8 +14,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="polls")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
- *
- * @UniqueEntity({"group", "criteria"})
  */
 abstract class AbstractPoll
 {
