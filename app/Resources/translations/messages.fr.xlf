@@ -276,6 +276,26 @@
         <source>title.elections.list.past</source>
         <target>Élections passées</target>
       </trans-unit>
+      <trans-unit id="8a56c730ffc549b263b34b8273a25e51" resname="link.sonata.admin">
+        <source>link.sonata.admin</source>
+        <target>Aller à l'interface d'administration Sonata</target>
+      </trans-unit>
+      <trans-unit id="5314972cddcd0e41142a9c2c51fdf8d2" resname="label.vote">
+        <source>label.vote</source>
+        <target>Voter</target>
+      </trans-unit>
+      <trans-unit id="343000c61e173260bb4d4a5e76f0d713" resname="title.list.allowed.polls">
+        <source>title.list.allowed.polls</source>
+        <target>Votes auxquels je peux participer</target>
+      </trans-unit>
+      <trans-unit id="afaaa2f823bdd4c1569ff03afe5a4e6a" resname="title.list.others.polls">
+        <source>title.list.others.polls</source>
+        <target>Autres votes</target>
+      </trans-unit>
+      <trans-unit id="e790703fb47aa323f4b856b4de37acff" resname="title.list.past.polls">
+        <source>title.list.past.polls</source>
+        <target>Votes passés</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
