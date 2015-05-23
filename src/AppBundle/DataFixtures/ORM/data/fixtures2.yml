@@ -118,17 +118,17 @@ AppBundle\Entity\Poll\Poll:
         criteria: default
     pollFuture (extends poll):
         name: futurepoll
-        description: futurepoll
+        description: <text(500)>
         openDate: <dateTimeBetween('+2 days', '+2 days')>
         closeDate: <dateTimeBetween('+3 days', '+3 days')>
     pollVote (extends poll):
         name: votepoll
-        description: votepoll
+        description: <text(500)>
         openDate: <dateTimeBetween('-1 days', '-1 days')>
         closeDate: <dateTimeBetween('+1 days', '+1 days')>
     pollPast (extends poll):
         name: pastpoll
-        description: pastpoll
+        description: <text(500)>
         openDate: <dateTimeBetween('-2 days', '-2 days')>
         closeDate: <dateTimeBetween('-1 days', '-1 days')>
 
