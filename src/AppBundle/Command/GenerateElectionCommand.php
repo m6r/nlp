@@ -29,7 +29,7 @@ class GenerateElectionCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $group = $input->getArgument('group');
-        $namePattern = $input->getOption('name');
+        $namePattern = $input->getOption('name') ?: '%group% - %criteria%';
 
         $electionRuler = $this->getContainer()->get('app.election_ruler');
         $criterias = $electionRuler->getValidCriterias();
@@ -43,7 +43,7 @@ class GenerateElectionCommand extends ContainerAwareCommand
         $validateDate = function ($answer) {
             $date = \DateTime::createFromFormat('d-m-Y H:i:s', $answer);
             if (!$date) {
-                throw \RunTimeException('Bad date format.');
+                throw new \RunTimeException('Bad date format.');
             }
 
             return $date;
