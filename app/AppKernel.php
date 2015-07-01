@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new AppBundle\AppBundle(),
             new VoteAssemblee2015Bundle\VoteAssemblee2015Bundle(),
+            new VoteEquipeAnimationBundle\VoteEquipeAnimationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

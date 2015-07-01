@@ -1,0 +1,6 @@
+services:
+    app.vote_rules.equipe_animation:
+        class: VoteEquipeAnimationBundle\Poll\ElectionRule
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: app.election_rule }
