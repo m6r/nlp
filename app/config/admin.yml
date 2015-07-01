@@ -23,3 +23,12 @@ services:
             - ~
             - AppBundle\Entity\Poll\PollChoice
             - ~
+    sonata.admin.poll.election:
+        class: AppBundle\Admin\Poll\ElectionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Election", label: "Election" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Poll\Election
+            - ~
+            - @app.election_ruler
