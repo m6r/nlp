@@ -99,7 +99,7 @@ class ElectionRule implements ElectionRuleInterface
             WHERE election.group = :group
             AND user = :user
         ')
-            ->setParameter('group', "Équipe d\'animation")
+            ->setParameter('group', "Équipe d'animation")
             ->setParameter('user', $user->getId())
             ->getResult()
         ;
