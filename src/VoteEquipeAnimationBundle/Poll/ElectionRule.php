@@ -44,16 +44,7 @@ class ElectionRule implements ElectionRuleInterface
      */
     public function isAllowedToCandidate(User $user, Election $election)
     {
-        return !$this->em->createQuery('
-            SELECT candidacy
-            FROM AppBundle:Poll\Candidacy candidacy
-            JOIN candidacy.election election
-            WHERE election.group = "Équipe d\'animation"
-            AND candidacy.user = :user
-        ')
-            ->setParameter('user', $user->getId())
-            ->getResult()
-        ;
+        return $this->hasNotCandidated($user);
     }
 
     /**
@@ -69,16 +60,7 @@ class ElectionRule implements ElectionRuleInterface
      */
     public function getCandidateCriterias(User $user)
     {
-        $isAllowed = !$this->em->createQuery('
-            SELECT candidacy
-            FROM AppBundle:Poll\Candidacy candidacy
-            JOIN candidacy.election election
-            WHERE election.group = "Équipe d\'animation"
-            AND candidacy.user = :user
-        ')
-            ->setParameter('user', $user->getId())
-            ->getResult()
-        ;
+        $isAllowed = $this->hasNotCandidated($user);
 
         return $isAllowed ? $this->getValidCriterias() : array();
     }
@@ -105,5 +87,21 @@ class ElectionRule implements ElectionRuleInterface
     public function getWinnersNumber(Election $election)
     {
         return 2;
+    }
+
+    private function hasNotCandidated(User $user)
+    {
+        return !$this->em->createQuery('
+            SELECT candidacy
+            FROM AppBundle:Poll\Candidacy candidacy
+            JOIN candidacy.election election
+            JOIN candidacy.user user
+            WHERE election.group = :group
+            AND user = :user
+        ')
+            ->setParameter('group', "Équipe d\'animation")
+            ->setParameter('user', $user->getId())
+            ->getResult()
+        ;
     }
 }
