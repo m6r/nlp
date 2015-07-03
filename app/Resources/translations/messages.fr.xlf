@@ -130,9 +130,9 @@
       </trans-unit>
       <trans-unit id="c9999a5138966cdc6a938169d6df8982" resname="candidacy.information">
         <source>candidacy.information</source>
-        <target>Vous êtes en train de vous inscrire pour candidater à l'assemblée représentative
-          du M6R «Nous le Peuple». Cette candidature est définitive. Vérifiez bien les informations
-          quee vous fournissez. Merci ! C'est ensemble que le
+        <target>Vous êtes en train de vous inscrire pour candidater à une élection interne
+          du M6R. Cette candidature est définitive. Vérifiez bien les informations
+          que vous fournissez. Merci ! C'est ensemble que le
           mouvement se construit.</target>
       </trans-unit>
       <trans-unit id="20433b5e57b982f29b1ca8b9b9848c51" resname="label.gender">
@@ -149,11 +149,11 @@
       </trans-unit>
       <trans-unit id="e1d7344eda2aca2fe453fcb7ce10a57b" resname="candidady.gender.help">
         <source>candidady.gender.help</source>
-        <target>Cette information sera publique. Elle vise à respecter la parité de l'Assemblée.</target>
+        <target>Cette information sera publique. Elle vise à respecter la parité.</target>
       </trans-unit>
       <trans-unit id="aedad601dde1c814221ac0aea59881e5" resname="help.changeAvatar">
         <source>help.changeAvatar</source>
-        <target>Vous pouvez changer votre avatar dans votre profil Nous le Peuple</target>
+        <target>Vous pouvez changer votre avatar dans votre profil Nous le Peuple.</target>
       </trans-unit>
       <trans-unit id="86a50ae869c82ff38e569109ec95cd95" resname="label.firstName">
         <source>label.firstName</source>
