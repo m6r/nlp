@@ -44,15 +44,15 @@ class ElectionRule implements ElectionRuleInterface
      */
     public function isAllowedToCandidate(User $user, Election $election)
     {
-        return !$em->createQuery('
+        return !$this->em->createQuery('
             SELECT candidacy
             FROM AppBundle:Poll\Candidacy candidacy
             JOIN candidacy.election election
             WHERE election.group = "Équipe d\'animation"
             AND candidacy.user = :user
         ')
-            ->setParameter('user', $user)
-            ->getResults()
+            ->setParameter('user', $user->getId())
+            ->getResult()
         ;
     }
 
@@ -69,15 +69,15 @@ class ElectionRule implements ElectionRuleInterface
      */
     public function getCandidateCriterias(User $user)
     {
-        $isAllowed = !$em->createQuery('
+        $isAllowed = !$this->em->createQuery('
             SELECT candidacy
             FROM AppBundle:Poll\Candidacy candidacy
             JOIN candidacy.election election
             WHERE election.group = "Équipe d\'animation"
             AND candidacy.user = :user
         ')
-            ->setParameter('user', $user)
-            ->getResults()
+            ->setParameter('user', $user->getId())
+            ->getResult()
         ;
 
         return $isAllowed ? $this->getValidCriterias() : array();

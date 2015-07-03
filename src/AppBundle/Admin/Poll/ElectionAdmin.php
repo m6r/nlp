@@ -29,7 +29,8 @@ class ElectionAdmin extends Admin
     {
         parent::__construct($code, $class, $baseControllerName);
         $this->ruler = $ruler;
-        $this->ruleGroups = array_keys($this->ruler->getValidCriterias());
+        $ruleGroups = array_keys($this->ruler->getValidCriterias());
+        $this->ruleGroups = array_combine($ruleGroups, $ruleGroups);
         $this->ruleCriterias = array();
         foreach ($this->ruler->getValidCriterias() as $group => $criterias) {
             foreach ($criterias as $criteria) {
