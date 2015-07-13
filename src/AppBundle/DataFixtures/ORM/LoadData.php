@@ -71,4 +71,15 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
 
         return $encoder->encodePassword($password ?: $faker->word);
     }
+
+    public function phoneNumberVO($phoneNumber)
+    {
+        $phoneUtil = $this->container->get('libphonenumber.phone_number_util');
+
+        try {
+            return $phoneUtil->parse($phoneNumber, 'FR');
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
 }

@@ -7,7 +7,7 @@ AppBundle\Entity\User:
         url: "20%? <url()> :  "
         lastLogin: <dateTimeBetween('-200 days', 'now')>
         IP: <ipv4()>
-        phoneNumber: "95%? <regexify('0[6-7][0-9]{8}')> : <regexify('\+[0-9]{8,15}')>"
+        phoneNumber: "95%? <phoneNumberVO($fake('regexify', null, '0[6-7][0-9]{8}'))> : <phoneNumberVO($fake('regexify', null, '\+[0-9]{8,15}'))>"
         lastName: <lastName()>
         firstName: <firstName()>
         gender: "<randomElement(array('M', 'F'))>"

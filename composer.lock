@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4bc2008c19fabc1f78de80614111f686",
+    "hash": "87dd3c214632a2fa9d67ff3378aca2ed",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -995,12 +995,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "6615c01b7b2a9c46f4cc426f860866a122eae0af"
+                "reference": "587a38f912801eb778125d67ed5feae0d6717cb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/6615c01b7b2a9c46f4cc426f860866a122eae0af",
-                "reference": "6615c01b7b2a9c46f4cc426f860866a122eae0af",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/587a38f912801eb778125d67ed5feae0d6717cb8",
+                "reference": "587a38f912801eb778125d67ed5feae0d6717cb8",
                 "shasum": ""
             },
             "require": {
@@ -1039,7 +1039,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2015-06-23 08:30:36"
+            "time": "2015-07-13 13:55:48"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1882,16 +1882,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.14.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "b287fbbe1ca27847064beff2bad7fb6920bf08cc"
+                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/b287fbbe1ca27847064beff2bad7fb6920bf08cc",
-                "reference": "b287fbbe1ca27847064beff2bad7fb6920bf08cc",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/dc5150cc608f2334c72c3b6a553ec9668a4156b0",
+                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0",
                 "shasum": ""
             },
             "require": {
@@ -1928,7 +1928,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.14.x-dev"
+                    "dev-master": "1.15.x-dev"
                 }
             },
             "autoload": {
@@ -1954,25 +1954,25 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-06-19 13:29:54"
+            "time": "2015-07-12 13:54:09"
         },
         {
             "name": "nelmio/alice",
-            "version": "1.7.2",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/alice.git",
-                "reference": "33cfab06b7e0d546c001ba95f9c594e4bd63d958"
+                "reference": "ff45f598963a7f6dcb8589fa74f33a70f05a4064"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/alice/zipball/33cfab06b7e0d546c001ba95f9c594e4bd63d958",
-                "reference": "33cfab06b7e0d546c001ba95f9c594e4bd63d958",
+                "url": "https://api.github.com/repos/nelmio/alice/zipball/ff45f598963a7f6dcb8589fa74f33a70f05a4064",
+                "reference": "ff45f598963a7f6dcb8589fa74f33a70f05a4064",
                 "shasum": ""
             },
             "require": {
                 "fzaninotto/faker": "~1.0",
-                "php": ">=5.3",
+                "php": ">=5.4",
                 "symfony/yaml": "~2.0"
             },
             "require-dev": {
@@ -1997,11 +1997,12 @@
             ],
             "authors": [
                 {
-                    "name": "Tim Shelburne"
-                },
-                {
                     "name": "Jordi Boggiano",
                     "email": "j.boggiano@seld.be"
+                },
+                {
+                    "name": "Tim Shelburne",
+                    "email": "shelburt02@gmail.com"
                 }
             ],
             "description": "Expressive fixtures generator",
@@ -2011,7 +2012,7 @@
                 "orm",
                 "test"
             ],
-            "time": "2014-10-10 13:07:37"
+            "time": "2015-05-10 17:06:48"
         },
         {
             "name": "ovh/ovh",
