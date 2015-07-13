@@ -27,7 +27,7 @@ services:
         class: AppBundle\Security\Sha256PliggEncoder
     app.event_subscriber.post_auth:
         class: AppBundle\Listener\PostAuthSubscriber
-        arguments: [@router]
+        arguments: [@router, @doctrine.orm.entity_manager]
         tags:
             - { name: kernel.event_subscriber }
     app.security.access.profile_frozen_voter:

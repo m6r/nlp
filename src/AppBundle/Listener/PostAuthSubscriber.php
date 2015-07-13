@@ -2,6 +2,7 @@
 
 namespace AppBundle\Listener;
 
+use Doctrine\ORM\EntityManager;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -17,37 +18,43 @@ class PostAuthSubscriber implements EventSubscriberInterface
      */
     private $router;
 
-    public function __construct(UrlGeneratorInterface $router)
+    /**
+     * @var EntityManager
+     */
+    private $em;
+
+    public function __construct(UrlGeneratorInterface $router, EntityManager $em)
     {
         $this->router = $router;
+        $this->em = $em;
     }
 
     public static function getSubscribedEvents()
     {
         return array(
             FOSUserEvents::REGISTRATION_CONFIRM => 'onRegistrationConfirm',
-            //SecurityEvents::INTERACTIVE_LOGIN => 'onLogin'
+            SecurityEvents::INTERACTIVE_LOGIN => 'onLogin'
         );
     }
 
     public function onRegistrationConfirm(GetResponseUserEvent $event)
     {
-        $url = $this->router->generate('phone_send_code');
+        $user = $event->getUser();
+        $user->setIP($event->getRequest()->getClientIp());
+        $this->em->persist($user);
+        $this->em->flush();
 
+        $url = $this->router->generate('validate_phone');
         $event->setResponse(new RedirectResponse($url));
     }
 
     public function onLogin(InteractiveLoginEvent $event)
     {
         $token = $event->getAuthenticationToken();
-
         $user = $token->getUser();
         $user->setLastIP($event->getRequest()->getClientIp());
-
-        if (!$user->isPhoneConfirmed()) {
-            $url = $this->router->generate('phone_confirm');
-
-            return new RedirectResponse($url);
-        }
+        $user->setLastLogin(new \DateTime());
+        $this->em->persist($user);
+        $this->em->flush();
     }
 }
