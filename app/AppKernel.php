@@ -24,6 +24,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Misd\PhoneNumberBundle\MisdPhoneNumberBundle(),
             new AppBundle\AppBundle(),
             new VoteAssemblee2015Bundle\VoteAssemblee2015Bundle(),
             new VoteEquipeAnimationBundle\VoteEquipeAnimationBundle(),

@@ -2,15 +2,15 @@
 
 namespace AppBundle\Poll;
 
-use AppBundle\Entity\User;
 use AppBundle\Entity\Poll\Election;
+use AppBundle\Entity\User;
 
 interface ElectionRuleInterface extends PollRuleInterface
 {
     /**
      * Should the elections be organized to chose equal number of women and men.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasGenderParity();
 
@@ -20,7 +20,7 @@ interface ElectionRuleInterface extends PollRuleInterface
      * @param User     $user     The user we should check.
      * @param Election $election The election we are talking about.
      *
-     * @return boolean
+     * @return bool
      */
     public function isAllowedToCandidate(User $user, Election $election);
 
@@ -40,7 +40,7 @@ interface ElectionRuleInterface extends PollRuleInterface
      * @param User     $user     The user in question.
      * @param Election $election The election.
      *
-     * @return integer The number of votes the user can use.
+     * @return int The number of votes the user can use.
      */
     public function getVoteNumber(User $user, Election $election);
 
@@ -49,7 +49,7 @@ interface ElectionRuleInterface extends PollRuleInterface
      *
      * @param Election $election The number of winners
      *
-     * @return integer
+     * @return int
      */
     public function getWinnersNumber(Election $election);
 }

@@ -2,9 +2,9 @@
 
 namespace VoteEquipeAnimationBundle\Poll;
 
-use AppBundle\Entity\User;
-use AppBundle\Entity\Poll\Election;
 use AppBundle\Entity\Poll\AbstractPoll;
+use AppBundle\Entity\Poll\Election;
+use AppBundle\Entity\User;
 use AppBundle\Poll\ElectionRuleInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -16,7 +16,8 @@ class ElectionRule implements ElectionRuleInterface
     private $em;
 
     /**
-     * Constructor
+     * Constructor.
+     *
      * @param Doctrine\ORM\EntityManagerInterface $em
      */
     public function __construct(EntityManagerInterface $em)

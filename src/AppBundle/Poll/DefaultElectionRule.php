@@ -2,9 +2,9 @@
 
 namespace AppBundle\Poll;
 
-use AppBundle\Entity\User;
-use AppBundle\Entity\Poll\Election;
 use AppBundle\Entity\Poll\AbstractPoll;
+use AppBundle\Entity\Poll\Election;
+use AppBundle\Entity\User;
 
 class DefaultElectionRule implements ElectionRuleInterface
 {

@@ -1,22 +1,23 @@
 <?php
+
 namespace AppBundle\Security\Authorization\Voter;
 
 use AppBundle\Entity\User;
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
-class ProfileLockedVoter implements VoterInterface
+class ProfileFrozenVoter implements VoterInterface
 {
-    private $enforceLocking;
+    private $enforceFreezing;
 
-    public function __construct($enforceLocking)
+    public function __construct($enforceFreezing)
     {
-        $this->enforceLocking = $enforceLocking;
+        $this->enforceFreezing = $enforceFreezing;
     }
 
     public function supportsAttribute($attribute)
     {
-        return 'IS_PROFILE_LOCKED' === $attribute;
+        return 'IS_PROFILE_LOCKED' === $attribute || 'IS_PROFILE_FROZEN' === $attribute;
     }
 
     public function supportsClass($class)
@@ -44,10 +45,10 @@ class ProfileLockedVoter implements VoterInterface
             return VoterInterface::ACCESS_DENIED;
         }
 
-        if (!$this->enforceLocking) {
+        if (!$this->enforceFreezing) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
-        return $user->isProfileLocked() ? VoterInterface::ACCESS_GRANTED : VoterInterface::ACCESS_DENIED;
+        return $user->isProfileFrozen() ? VoterInterface::ACCESS_GRANTED : VoterInterface::ACCESS_DENIED;
     }
 }

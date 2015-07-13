@@ -17,8 +17,10 @@ parameters:
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
+    mailer_port:       ~
     mailer_user:       ~
     mailer_password:   ~
+    mailer_dev_address: email@example.org
 
     locale:            en
 
@@ -29,5 +31,14 @@ parameters:
     table_prefix:      pligg_
     # for redirections to pligg legacy
     legacy_base_url:   https://www.m6r.fr/nouslepeuple
-    # should the profile be locked
-    lock_profiles: false
+    # should the profile be frozen
+    freeze_profiles: false
+
+    from_email:        email@example.com
+    site_name:         Site Name
+
+    # ovh SMS sending
+    ovh_sms_app_key: ~
+    ovh_sms_app_secret: ~
+    ovh_sms_consumer_key: ~
+    ovh_sms_service_name: ~

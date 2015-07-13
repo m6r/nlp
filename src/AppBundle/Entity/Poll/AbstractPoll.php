@@ -3,11 +3,10 @@
 namespace AppBundle\Entity\Poll;
 
 use AppBundle\Entity\User;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity()
@@ -18,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 abstract class AbstractPoll
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -267,7 +266,7 @@ abstract class AbstractPoll
      *
      * @param User $user
      *
-     * @return boolean
+     * @return bool
      */
     public function hasVoted(User $user)
     {

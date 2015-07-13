@@ -3,8 +3,7 @@ imports:
     - { resource: admin.yml }
 
 services:
-    app.sha256_pligg_encoder:
-        class: AppBundle\Security\Sha256PliggEncoder
+    # legacy database management
     app.table_prefix_listener:
         class: AppBundle\Listener\TablePrefixListener
         arguments: [%table_prefix%]
@@ -14,6 +13,51 @@ services:
         class: AppBundle\Listener\CategoryIdListener
         tags:
             - { name: doctrine.event_listener, event: postPersist }
+
+    app.sms_sender.ovh:
+        class: AppBundle\SMS\SMSSenderOVH
+        arguments: [%ovh_sms_app_key%, %ovh_sms_app_secret%, %ovh_sms_consumer_key%, %ovh_sms_service_name%]
+    app.sms_sender.test:
+        class: AppBundle\SMS\SMSSenderTest
+        arguments: [@mailer, %mailer_dev_address%]
+    app.sms_sender: @app.sms_sender.ovh
+
+    # authentication and security
+    app.sha256_pligg_encoder:
+        class: AppBundle\Security\Sha256PliggEncoder
+    app.event_subscriber.post_auth:
+        class: AppBundle\Listener\PostAuthSubscriber
+        arguments: [@router]
+        tags:
+            - { name: kernel.event_subscriber }
+    app.security.access.profile_frozen_voter:
+        class:     AppBundle\Security\Authorization\Voter\ProfileFrozenVoter
+        arguments: [%freeze_profiles%]
+        public:    false
+        tags:
+            - { name: security.voter }
+    app.security.access_denied_handler:
+        class: AppBundle\Security\AccessDeniedHandler
+        arguments: [@security.authorization_checker, @router]
+        public: false
+
+    # gedmo extension
+    gedmo_doctrine_extensions.listener.ip_traceable:
+        class: Gedmo\IpTraceable\IpTraceableListener
+        public: false
+        tags:
+            - { name: doctrine.event_subscriber }
+        call:
+            - [ setAnnotationReader, [@annotation_reader] ]
+    alterphp_doctrine_extensions.event_subscriber.ip_trace:
+        class: AppBundle\Listener\IpTraceSubscriber
+        scope: request
+        arguments: [@gedmo_doctrine_extensions.listener.ip_traceable, @?request]
+        tags:
+            - { name: kernel.event_subscriber}
+
+
+    # elections rules
     app.election_ruler:
         class: AppBundle\Poll\ElectionRuler
     app.election_ruler.default_rules:
@@ -31,12 +75,14 @@ services:
         public:    false
         tags:
             - { name: security.voter }
-    app.security.access.profile_locked_voter:
-        class:     AppBundle\Security\Authorization\Voter\ProfileLockedVoter
-        arguments: [%lock_profiles%]
-        public:    false
+
+    app.form.type.user_registration:
+        class: AppBundle\Form\Type\UserRegistrationType
+        arguments: [%fos_user.model.user.class%]
         tags:
-            - { name: security.voter }
+            - { name: form.type, alias: user_registration }
+
+    # twig extension
     twig.extension.array:
         class: Twig_Extensions_Extension_Array
         tags:

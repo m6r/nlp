@@ -1,9 +1,10 @@
 <?php
+
 namespace AppBundle\Security\Authorization\Voter;
 
 use AppBundle\Entity\User;
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 class PollVoter implements VoterInterface
 {

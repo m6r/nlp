@@ -2,8 +2,8 @@
 
 namespace AppBundle\Listener;
 
-use Doctrine\ORM\Event\LifecycleEventArgs;
 use AppBundle\Entity\Category;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class CategoryIdListener
 {

@@ -3,9 +3,9 @@
 namespace AppBundle\Entity\Poll;
 
 use AppBundle\Entity\User;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -87,7 +87,7 @@ class PollVote
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

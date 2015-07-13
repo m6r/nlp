@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Entity\Poll;
 
 use Doctrine\ORM\EntityRepository;

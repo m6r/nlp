@@ -8,7 +8,7 @@ class Sha256PliggEncoder implements PasswordEncoderInterface
 {
     public function encodePassword($raw, $salt = null)
     {
-        if ($salt === null) {
+        if (!$salt) {
             $salt = substr(md5(uniqid(rand(), true)), 0, 9);
         } else {
             $salt = substr($salt, 0, 9);

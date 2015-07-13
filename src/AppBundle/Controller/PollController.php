@@ -5,11 +5,11 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Poll\Candidacy;
 use AppBundle\Entity\Poll\Election;
 use AppBundle\Entity\Poll\ElectionVote;
-use AppBundle\Entity\Poll\PollVote;
 use AppBundle\Entity\Poll\Poll;
+use AppBundle\Entity\Poll\PollVote;
 use AppBundle\Form\Type\CandidacyType;
-use AppBundle\Form\Type\PollVoteType;
 use AppBundle\Form\Type\ElectionVoteType;
+use AppBundle\Form\Type\PollVoteType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @Route("/polls")
+ * @Security("is_granted('ROLE_USER') && is_granted('IS_PROFILE_LOCKED') && is_granted('ROLE_VOTER')")
  */
 class PollController extends Controller
 {
@@ -27,10 +28,6 @@ class PollController extends Controller
     public function listPollsAction()
     {
         $security = $this->get('security.authorization_checker');
-        if (!$security->isGranted('IS_PROFILE_LOCKED')) {
-            return $this->redirect($this->generateUrl('profile_validate'));
-        }
-
         $em = $this->getDoctrine()->getManager();
 
         $elections = $em->getRepository('AppBundle:Poll\Election')->findAllCurrent();
@@ -60,7 +57,6 @@ class PollController extends Controller
 
     /**
      * @Route("/election/{id}/show", name="election_show", requirements={"id": "\d+"})
-     * @Security("is_granted('IS_PROFILE_LOCKED')")
      */
     public function electionShowAction(Election $election)
     {
@@ -74,7 +70,7 @@ class PollController extends Controller
 
     /**
      * @Route("/election/{id}/candidate", name="election_candidate", requirements={"id": "\d+"})
-     * @Security("is_granted('IS_PROFILE_LOCKED') && is_granted('ELECTION_CANDIDATE', election)")
+     * @Security("is_granted('ELECTION_CANDIDATE', election)")
      */
     public function electionDoCandidateAction(Election $election, Request $request)
     {
@@ -108,7 +104,7 @@ class PollController extends Controller
 
     /**
      * @Route("/election/{id}/vote", name="election_vote", requirements={"id": "\d+"})
-     * @Security("is_granted('IS_PROFILE_LOCKED') && is_granted('ELECTION_VOTE', election)")
+     * @Security("is_granted('ELECTION_VOTE', election)")
      */
     public function electionDoVoteAction(Election $election, Request $request)
     {
@@ -148,7 +144,7 @@ class PollController extends Controller
 
     /**
      * @Route("/election/{id}/vote/confirm", name="election_vote_confirm", requirements={"id": "\d+"})
-     * @Security("is_granted('IS_PROFILE_LOCKED') && is_granted('ELECTION_VOTE', election)")
+     * @Security("is_granted('ELECTION_VOTE', election)")
      */
     public function electionVoteConfirmAction(Election $election, Request $request)
     {
@@ -205,7 +201,7 @@ class PollController extends Controller
 
     /**
      * @Route("/{id}/vote", name="poll_vote", requirements={"id": "\d+"})
-     * @Security("is_granted('IS_PROFILE_LOCKED') && is_granted('POLL_VOTE', poll)")
+     * @Security("is_granted('POLL_VOTE', poll)")
      */
     public function pollVoteAction(Poll $poll, Request $request)
     {

@@ -54,7 +54,7 @@
     <section id="maincontent" class="text-justify">
       <div class="row">
         <div class="col-md-12">
-          {% set flashes = app.session.flashbag.all() %}
+          {% set flashes = app.session.flashbag.get('error')|merge(app.session.flashbag.get('success')) %}
           {% set css = {'error': 'warning', 'success': 'success'} %}
 
           {% if flashes | length > 0 %}

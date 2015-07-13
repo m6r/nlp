@@ -2,8 +2,8 @@
 
 namespace AppBundle\Poll\Tests\Poll;
 
-use AppBundle\Entity\User;
 use AppBundle\Entity\Poll\Election;
+use AppBundle\Entity\User;
 use AppBundle\Poll\ElectionRuler;
 
 class ElectionRulerTest extends \PHPUnit_Framework_TestCase

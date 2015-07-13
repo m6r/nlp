@@ -71,13 +71,13 @@
         <source>form.validate</source>
         <target>Valider</target>
       </trans-unit>
-      <trans-unit id="f5518b3aaaa2622484b3bcf594525d63" resname="zipCode">
-        <source>zipCode</source>
+      <trans-unit id="72c8a07e432fe33d231ffeb04b5bf622" resname="label.zipCode">
+        <source>label.zipCode</source>
         <target>Code postal</target>
       </trans-unit>
-      <trans-unit id="c9aa10b21bc611b05b1d8e0c01e5d397" resname="phoneNumber">
-        <source>phoneNumber</source>
-        <target>Numéro de téléphone</target>
+      <trans-unit id="89d28efb4b4bee9d90bb01cdc518409c" resname="label.phoneNumber">
+        <source>label.phoneNumber</source>
+        <target>Numéro de téléphone portable</target>
       </trans-unit>
       <trans-unit id="231ae39bc8749489a8b9726db592fa73" resname="phoneNumberField.validationRule">
         <source>phoneNumberField.validationRule</source>
@@ -254,7 +254,7 @@
       </trans-unit>
       <trans-unit id="c322434cebbb24730ee120297eb32995" resname="login.instructions.registration">
         <source>login.instructions.registration</source>
-        <target>Pour voter, vous devez disposer d’abord d’un compte « Nous le Peuple ». Ce n’est pas encore le cas ? Vous pouvez vous inscrire %link_start%en cliquant ici%link_end%.</target>
+        <target>Pour voter, vous devez disposer d’abord d’un compte « Nous le Peuple ». Ce n’est pas encore le cas ? Inscrivez-vous %link_start%en cliquant ici%link_end%.</target>
       </trans-unit>
       <trans-unit id="60019db4a87e08f4363f77ecc63362db" resname="vote.noCandidates">
         <source>vote.noCandidates</source>
@@ -295,6 +295,44 @@
       <trans-unit id="e790703fb47aa323f4b856b4de37acff" resname="title.list.past.polls">
         <source>title.list.past.polls</source>
         <target>Votes passés</target>
+      </trans-unit>
+      <trans-unit id="e4cef92707fd516d7ddf4bd426195409" resname="text.help.phone_validate.enter_code">
+        <source>text.help.phone_validate.enter_code</source>
+        <target>Entrez ci-dessous le code que vous avez reçu par SMS. Vous pourrez alors
+          accéder à la plateforme de vote.</target>
+      </trans-unit>
+      <trans-unit id="55f307f95f7a3642df1dc90050c48f50" resname="label.validate_phone">
+        <source>label.validate_phone</source>
+        <target>Valider mon compte.</target>
+      </trans-unit>
+      <trans-unit id="545ed0cb1dee5bfbee328a8d01f6afdd" resname="text.help.phone_validate.send_code">
+        <source>text.help.phone_validate.send_code</source>
+        <target>En cliquant sur le bouton ci-dessous, vous allez recevoir un code par SMS. Ce code
+        vous est nécessaire pour valider votre compte.</target>
+      </trans-unit>
+      <trans-unit id="18a1d16173eeb7d719b9d42ee3f44603" resname="label.send_phone_code">
+        <source>label.send_phone_code</source>
+        <target>M'envoyer le code de validation.</target>
+      </trans-unit>
+      <trans-unit id="2a2e469ff7186467d5acb9661c88179c" resname="message.phone_validation_code">
+        <source>message.phone_validation_code</source>
+        <target>Voici le code que vous devez entrer sur %site_name% pour valider votre compte </target>
+      </trans-unit>
+      <trans-unit id="c3a7944ccab88469254e2e5523315229" resname="label.city">
+        <source>label.city</source>
+        <target>Ville</target>
+      </trans-unit>
+      <trans-unit id="9d2f9323a95a98848757ff4b212324fa" resname="label.country">
+        <source>label.country</source>
+        <target>Pays</target>
+      </trans-unit>
+      <trans-unit id="d97781961bb9ca15421520a94d189907" resname="label.birthDate">
+        <source>label.birthDate</source>
+        <target>Date de naissance</target>
+      </trans-unit>
+      <trans-unit id="14e9282216eddcda8b105a7e689ac8d4" resname="text.help.required">
+        <source>text.help.required</source>
+        <target>Ce champ est requis</target>
       </trans-unit>
     </body>
   </file>

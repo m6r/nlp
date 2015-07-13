@@ -2,11 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Entity\Poll\Poll;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use AppBundle\Entity\Poll\Poll;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Security("has_role('ROLE_ADMIN')")

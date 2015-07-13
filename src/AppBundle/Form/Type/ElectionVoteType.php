@@ -2,8 +2,6 @@
 
 namespace AppBundle\Form\Type;
 
-use AppBundle\Entity\Poll\Candidacy;
-use AppBundle\Entity\Poll\ElectionVote;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

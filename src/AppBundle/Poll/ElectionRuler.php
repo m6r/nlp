@@ -2,8 +2,8 @@
 
 namespace AppBundle\Poll;
 
-use AppBundle\Entity\User;
 use AppBundle\Entity\Poll\Election;
+use AppBundle\Entity\User;
 
 class ElectionRuler
 {
@@ -52,7 +52,7 @@ class ElectionRuler
      * @param User     $user     The user we should check.
      * @param Election $election The election we are talking about.
      *
-     * @return boolean
+     * @return bool
      */
     public function isAllowedToCandidate(User $user, Election $election)
     {
@@ -66,7 +66,7 @@ class ElectionRuler
      * @param User     $user     The user we should check.
      * @param Election $election The election we are talking about.
      *
-     * @return boolean
+     * @return bool
      */
     public function isAllowedToVote(User $user, Election $election)
     {
@@ -120,7 +120,7 @@ class ElectionRuler
      * @param User     $user     The user in question.
      * @param Election $election The election.
      *
-     * @return integer The number of votes the user can use.
+     * @return int The number of votes the user can use.
      */
     public function getVoteNumber(User $user, Election $election)
     {

@@ -2,8 +2,8 @@
 
 namespace AppBundle\Entity\Poll;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -100,7 +100,7 @@ class Election extends AbstractPoll
      *
      * @param AppBundle\Entity\User $user
      *
-     * @return boolean
+     * @return bool
      */
     public function isCandidate(\AppBundle\Entity\User $user)
     {

@@ -2,8 +2,8 @@
 
 namespace AppBundle\Poll;
 
-use AppBundle\Entity\User;
 use AppBundle\Entity\Poll\AbstractPoll;
+use AppBundle\Entity\User;
 
 interface PollRuleInterface
 {
@@ -22,7 +22,7 @@ interface PollRuleInterface
      * @param User         $user The user we should check.
      * @param AbstractPoll $poll The election we are talking about.
      *
-     * @return boolean
+     * @return bool
      */
     public function isAllowedToVote(User $user, AbstractPoll $poll);
 

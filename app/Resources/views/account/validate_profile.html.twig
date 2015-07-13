@@ -9,13 +9,13 @@
       {{ form_start(form) }}
         {{ form_errors(form) }}
         <div class="form-group">
-          {{ form_label(form.zipCode, 'zipCode'|trans) }}
+          {{ form_label(form.zipCode) }}
           {{ form_widget(form.zipCode) }}
           {{ form_errors(form.zipCode) }}
           <span class="help-block">{{ 'help.zipCodeField'|trans }}</span>
         </div>
         <div class="form-group">
-          {{ form_label(form.phoneNumber, 'phoneNumber'|trans) }}
+          {{ form_label(form.phoneNumber) }}
           {{ form_widget(form.phoneNumber) }}
           {{ form_errors(form.phoneNumber) }}
           <span class="help-block">{{ 'phoneNumberField.validationRule'|trans }}</span>

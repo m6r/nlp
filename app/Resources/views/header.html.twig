@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ path('index') }}">{{ 'site.name'|trans }}</a>
+      <a class="navbar-brand" href="{{ path('index') }}">{{ site_name }}</a>
     </div>
     <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
       <ul class="nav navbar-nav">
@@ -20,22 +20,22 @@
         {#<li><a href="{{ path('submit') }}">{{ 'link.submit'|trans }}</a></li>#}
         {#<li><a href="{{ path('groups') }}">{{ 'link.groups'|trans }}</a></li>#}
         <li><a href="{{ path('polls') }}">{{ 'link.polls'|trans }}</a></li>
-        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-          <li><a href="{{ path('login') }}">{{ 'link.login'|trans }}</a></li>
+        {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+          <li><a href="{{ path('fos_user_security_login') }}">{{ 'link.login'|trans }}</a></li>
         {% elseif is_granted('ROLE_ADMIN') %}
           <li><a href="{{ path('admin_index') }}">{{ 'link.admin'|trans }}</a></li>
         {% endif %}
       </ul>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <div class="btn-group navbar-right">
-            <a class="btn btn-default{# dropdown-toggle" data-toggle="dropdown#}" href="#">
+            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
               <img src="{{ asset(app.user.avatarPath('small')) }}"
               onerror="this.src='{{ asset('avatars/m6r_32.png') }}"
               style="height:16px;width:16px;" />
               &nbsp;{{ app.user.username }}
-              {#<span class="caret"></span>#}
+              <span class="caret"></span>
             </a>
-            {#<ul class="dropdown-menu">#}
+            <ul class="dropdown-menu">
                 {#<li><a href="{{ path('profile') }}" >{{ 'link.profile'|trans }}</a></li>#}
                 {#<li><a href="{{ path('user_edit', { username: app.user }) }}">{{ 'link.settings'|trans }}</a></li>#}
                 {#<li><a href="{$user_url_news_sent}">{{ 'link.sent_history'|trans }}</a></li>#}
@@ -45,7 +45,12 @@
                 {#<li><a href="{$user_url_saved}">{{ 'link.saved'|trans }}</a></li>#}
                 {#<li class="divider"></li>#}
                 {#<li><a href="{{ path('logout') }}">{{ 'link.logout'|trans }}</a></li>#}
-            {#</ul>#}
+              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <li><a href="{{ path('fos_user_security_logout') }}">
+                  {{ 'link.logout'|trans }}
+                </a></li>
+              {% endif %}
+            </ul>
           </div>
         {% endif %}
     </nav>

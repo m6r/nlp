@@ -2,9 +2,9 @@
 
 namespace VoteAssemblee2015Bundle\Poll;
 
-use AppBundle\Entity\User;
-use AppBundle\Entity\Poll\Election;
 use AppBundle\Entity\Poll\AbstractPoll;
+use AppBundle\Entity\Poll\Election;
+use AppBundle\Entity\User;
 use AppBundle\Poll\ElectionRuleInterface;
 
 class ElectionRule implements ElectionRuleInterface
@@ -141,7 +141,7 @@ class ElectionRule implements ElectionRuleInterface
     /**
      * Récupérer le nom de la région à partir d'un code postal.
      *
-     * @param integer $codePostal Le code postal
+     * @param int $codePostal Le code postal
      *
      * @return [type] [description]
      */
@@ -270,13 +270,13 @@ class ElectionRule implements ElectionRuleInterface
             case 97:
             case 98:
                 $departement = ($codePostal - ($codePostal % 100)) / 100;
-                if (in_array($departement, array(971, 972, 973, 975, 977))) {
+                if (in_array($departement, array(971, 972, 973, 975, 977), true)) {
                     return 'Outre-mer - Océan Atlantique';
                 }
-                if (in_array($departement, array(974, 976))) {
+                if (in_array($departement, array(974, 976), true)) {
                     return 'Outre-mer - Océan Indien';
                 }
-                if (in_array($departement, range(986, 989))) {
+                if (in_array($departement, range(986, 989), true)) {
                     return 'Outre-mer - Océan Pacifique';
                 }
 

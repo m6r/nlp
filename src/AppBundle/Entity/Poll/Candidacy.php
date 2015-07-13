@@ -71,7 +71,7 @@ class Candidacy
     /**
      * Do the candidate want to stay anonyous.
      *
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(type="boolean")
      *
@@ -87,7 +87,7 @@ class Candidacy
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -217,7 +217,7 @@ class Candidacy
     /**
      * Set hideIdentity.
      *
-     * @param boolean $hideIdentity
+     * @param bool $hideIdentity
      *
      * @return Candidacy
      */
@@ -231,7 +231,7 @@ class Candidacy
     /**
      * Get hideIdentity.
      *
-     * @return boolean
+     * @return bool
      */
     public function getHideIdentity()
     {

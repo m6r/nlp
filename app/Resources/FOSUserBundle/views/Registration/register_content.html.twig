@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-8 col-md-push-4">
+        <h2>Rejoignez-nous !</h2>
+        <p class="lead">En vous inscrivant sur « Nous le Peuple », le réseau citoyen du mouvement pour la 6e République, vous signez le texte d’appel pour la 6e République :<p>
+        <p class="lead">« <i><b>Je demande l'élection d'une assemblée constituante qui fonde avec les citoyens la 6e République. Une République débarrassée de la monarchie présidentielle et fondant les nouveaux droits personnels, écologiques et sociaux dont notre pays a besoin.</b><br> Je recevrai par mail les informations sur le Mouvement pour la 6e République.</i> »</p>
+        <p>Parmi les informations obligatoires qui vous sont demandées dans le formulaire ci-joint, seul le « Nom de citoyen » apparaîtra publiquement.</p>
+        <p>Toutes les autres informations, notamment : votre nom, votre prénom, votre mail et votre numéro de téléphone resteront privées et protégées.</p>
+        <p>Vous inscrire vous permettra d’utiliser toutes les fonctionnalités de notre réseau citoyen, et notamment :</p>
+        <ul>
+            <li>de voter lors des différents scrutins du M6R</li>
+            <li>d'écrire vos propres articles pour les soumettre au débat</li>
+            <li>de voter sur les articles des autres citoyens</li>
+            <li>de commenter les articles publiés</li>
+            <li>d'avoir un suivi de vos actions sur votre page de profil</li>
+            <li>et bien d'autres choses encore !</li>
+        </ul>
+    </div>
+    <div class="col-md-4 col-md-pull-8">
+        <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+            {{ form_widget(form) }}
+            <div>
+                <input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+            </div>
+        </form>
+    </div>
+</div>

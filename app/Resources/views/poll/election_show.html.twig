@@ -36,6 +36,7 @@
       {% for candidacy in election.candidacies|shuffle %}
         <div class="col-md-6">
           <h4>
+            {{ candidacy.user.firstName }} {{ candidacy.user.lastName }}
             <a target="_blank" href="{{ path('profile', {'username': candidacy.user.username}) }}">
               {{ candidacy.user.username }}
             </a>

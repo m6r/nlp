@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block center_content %}
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      {% if app.user.phoneCode %}
+        <div class="alert alert-info">
+          {{ 'text.help.phone_validate.enter_code'|trans }}
+        </div>
+        {{ form_start(form) }}
+          {{ form_widget(form) }}
+          <input type="submit" value="{{ 'label.validate_phone'|trans }}" class="btn btn-primary">
+        {{ form_end(form) }}
+      {% else %}
+        {{ form_start(sendCodeForm) }}
+          <div class="alert alert-info">
+            {{ 'text.help.phone_validate.send_code'|trans }}
+          </div>
+          <input type="submit" value="{{ 'label.send_phone_code'|trans }}" class="btn btn-primary">
+        {{ form_end(sendCodeForm) }}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

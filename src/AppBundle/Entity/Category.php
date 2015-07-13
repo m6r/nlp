@@ -2,8 +2,8 @@
 
 namespace AppBundle\Entity;
 
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @Gedmo\Tree(type="nested")
@@ -143,7 +143,7 @@ class Category
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -153,7 +153,7 @@ class Category
     /**
      * Update legacy ID and return false if it needs to be persisted again.
      *
-     * @return boolean
+     * @return bool
      */
     public function updateLegacyId()
     {
@@ -224,7 +224,7 @@ class Category
     /**
      * Set enabled.
      *
-     * @param integer $enabled
+     * @param int $enabled
      *
      * @return Category
      */
@@ -238,7 +238,7 @@ class Category
     /**
      * Is enabled.
      *
-     * @return integer
+     * @return int
      */
     public function isEnabled()
     {
@@ -248,7 +248,7 @@ class Category
     /**
      * Set order.
      *
-     * @param integer $order
+     * @param int $order
      *
      * @return Category
      */
@@ -262,7 +262,7 @@ class Category
     /**
      * Get order.
      *
-     * @return integer
+     * @return int
      */
     public function getOrder()
     {

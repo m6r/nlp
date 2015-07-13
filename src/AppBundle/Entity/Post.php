@@ -2,8 +2,8 @@
 
 namespace AppBundle\Entity;
 
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(
@@ -276,7 +276,7 @@ class Post
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -286,7 +286,7 @@ class Post
     /**
      * Set author.
      *
-     * @param integer $user
+     * @param int $user
      *
      * @return Post
      */
@@ -300,7 +300,7 @@ class Post
     /**
      * Get author.
      *
-     * @return integer
+     * @return int
      */
     public function getAuthor()
     {
@@ -334,7 +334,7 @@ class Post
     /**
      * Get randkey.
      *
-     * @return integer
+     * @return int
      */
     public function getRandkey()
     {
@@ -344,7 +344,7 @@ class Post
     /**
      * Get score.
      *
-     * @return integer
+     * @return int
      */
     public function getScore()
     {
@@ -354,7 +354,7 @@ class Post
     /**
      * Get likes.
      *
-     * @return integer
+     * @return int
      */
     public function getLikes()
     {
@@ -364,7 +364,7 @@ class Post
     /**
      * Get dislikes.
      *
-     * @return integer
+     * @return int
      */
     public function getDislikes()
     {
@@ -374,7 +374,7 @@ class Post
     /**
      * Get comments.
      *
-     * @return integer
+     * @return int
      */
     public function getCommentsNumber()
     {
@@ -384,7 +384,7 @@ class Post
     /**
      * Get debateScore.
      *
-     * @return integer
+     * @return int
      */
     public function getDebateScore()
     {
@@ -414,7 +414,7 @@ class Post
     /**
      * Set category.
      *
-     * @param integer $category
+     * @param int $category
      *
      * @return Post
      */
@@ -428,7 +428,7 @@ class Post
     /**
      * Get category.
      *
-     * @return integer
+     * @return int
      */
     public function getCategory()
     {
@@ -531,7 +531,7 @@ class Post
     /**
      * Set group.
      *
-     * @param integer $group
+     * @param int $group
      *
      * @return Post
      */
@@ -545,7 +545,7 @@ class Post
     /**
      * Get group.
      *
-     * @return integer
+     * @return int
      */
     public function getGroup()
     {

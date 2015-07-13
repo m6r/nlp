@@ -2,9 +2,12 @@
 
 namespace AppBundle\Entity;
 
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use FOS\UserBundle\Model\User as BaseUser;
+use Gedmo\Mapping\Annotation as Gedmo;
+use libphonenumber\PhoneNumber;
+use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -12,271 +15,303 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     @ORM\Index(name="user_email", columns={"user_email"})
  * })
  * @ORM\Entity()
+ * @ORM\AttributeOverrides({
+ *     @ORM\AttributeOverride(name="username",
+ *         column=@ORM\Column(
+ *             name="user_login",
+ *             type="string",
+ *             length=32,
+ *             unique=true,
+ *             options={"default"=""}
+ *         )
+ *     ),
+ *     @ORM\AttributeOverride(name="password",
+ *         column=@ORM\Column(
+ *             name="user_pass",
+ *             type="string",
+ *             length=256,
+ *             options={"default"=""}
+ *         )
+ *     ),
+ *     @ORM\AttributeOverride(name="email",
+ *         column=@ORM\Column(
+ *             name="user_email",
+ *             type="string",
+ *             length=128,
+ *             options={"default"=""}
+ *         )
+ *     ),
+ *     @ORM\AttributeOverride(name="lastLogin",
+ *         column=@ORM\Column(
+ *             name="user_lastlogin",
+ *             type="datetime",
+ *             options={"default"="0000-00-00 00:00:00"}
+ *         )
+ *     ),
+ *     @ORM\AttributeOverride(name="enabled",
+ *         column=@ORM\Column(
+ *             name="user_enabled",
+ *             type="boolean",
+ *             length=255,
+ *             options={"default"="1"}
+ *         )
+ *     )
+ * })
+ * @UniqueEntity("phoneNumber", groups={"Registration", "freeze"}, message="account.phone.already_used")
  */
-class User implements AdvancedUserInterface, \Serializable
+class User extends BaseUser
 {
     /**
      * @ORM\Column(type="integer", name="user_id")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=32, unique=true, name="user_login", options={"default"=""})
-     */
-    private $username;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", name="user_level", options={"default"="normal"})
      */
-    private $level;
+    protected $level = 'normal';
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", name="user_modification")
      */
-    private $updated;
+    protected $updated;
 
     /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime", name="user_date", options={"default"="0000-00-00 00:00:00"})
      */
-    private $created;
-
-    /**
-     * @ORM\Column(type="string", length=256, name="user_pass", options={"default"=""})
-     */
-    private $password;
-
-    /**
-     * @ORM\Column(type="string", length=128, name="user_email", options={"default"=""})
-     */
-    private $email;
+    protected $created;
 
     /**
      * @deprecated
      * @ORM\Column(type="string", length=128, name="user_names", options={"default"=""})
      */
-    private $names = '';
+    protected $names = '';
 
     /**
      * @deprecated
      * @ORM\Column(type="decimal", precision=10, scale=2, name="user_karma", nullable=true, options={"default"=0.00})
      */
-    private $karma;
+    protected $karma;
 
     /**
      * @ORM\Column(type="string", length=128, name="user_url", options={"default"=""})
      */
-    private $url = '';
-
-    /**
-     * @ORM\Column(type="datetime", name="user_lastlogin", options={"default"="0000-00-00 00:00:00"})
-     */
-    private $lastLogin;
+    protected $url = '';
 
     /**
      * @ORM\Column(type="string", length=64, name="user_facebook", options={"default"=""})
      */
-    private $facebook = '';
+    protected $facebook = '';
 
     /**
      * @ORM\Column(type="string", length=64, name="user_twitter", options={"default"=""})
      */
-    private $twitter = '';
+    protected $twitter = '';
 
     /**
      * @deprecated
      * @ORM\Column(type="string", length=64, name="user_linkedin", options={"default"=""})
      */
-    private $linkedin = '';
+    protected $linkedin = '';
 
     /**
      * @ORM\Column(type="string", length=64, name="user_googleplus", options={"default"=""})
      */
-    private $googleplus = '';
+    protected $googleplus = '';
 
     /**
      * @deprecated
      * @ORM\Column(type="string", length=64, name="user_skype", options={"default"=""})
      */
-    private $skype = '';
+    protected $skype = '';
 
     /**
      * @deprecated
      * @ORM\Column(type="string", length=64, name="user_pinterest", options={"default"=""})
      */
-    private $pinterest = '';
+    protected $pinterest = '';
 
     /**
      * @ORM\Column(type="string", length=64, name="public_email", options={"default"=""})
      */
-    private $publicEmail = '';
+    protected $publicEmail = '';
 
     /**
      * @ORM\Column(type="string", length=255, name="user_avatar_source", options={"default"=""})
      */
-    private $avatarSource = '';
+    protected $avatarSource = '';
 
     /**
      * @ORM\Column(type="string", length=20, name="user_ip", nullable=true, options={"default"="0"})
+     * @Gedmo\IpTraceable(on="create")
      */
-    private $userIP = '0';
+    protected $IP = '0';
 
     /**
      * @ORM\Column(type="string", length=20, name="user_lastip", nullable=true, options={"default"="0"})
      */
-    private $userLastIP = '0';
+    protected $lastIP = '0';
 
     /**
+     * @deprecated
      * @ORM\Column(type="datetime", name="last_reset_request", options={"default"="0000-00-00 00:00:00"})
      */
-    private $lastResetRequest;
+    protected $lastResetRequest;
 
     /**
+     * @deprecated
      * @ORM\Column(type="string", length=255, name="last_reset_code", nullable=true)
      */
-    private $lastResetCode;
+    protected $lastResetCode;
 
     /**
      * @ORM\Column(type="string", length=255, name="user_location", nullable=true)
      */
-    private $location;
+    protected $location;
 
     /**
      * @ORM\Column(type="string", length=255, name="user_occupation", nullable=true)
      */
-    private $occupation;
+    protected $occupation;
 
     /**
      * @ORM\Column(type="string", length=255, name="user_categories", options={"default"=""})
      */
-    private $categories = '';
-
-    /**
-     * @ORM\Column(type="boolean", length=255, name="user_enabled", options={"default"="1"})
-     */
-    private $enabled = '1';
+    protected $categories = '';
 
     /**
      * @deprecated
      * @ORM\Column(type="string", length=32, name="user_language", nullable=true)
      */
-    private $language;
+    protected $language;
 
     /**
-     * @var string Private information (the regex is for any french number
-     *             without prefix, or any foreigner number with international prefix)
-     * @ORM\Column(type="string", length=16, name="user_numero_tel", nullable=true)
+     * @var PhoneNumber Private information
      *
-     * @Assert\Regex("/(^0[1-9][0-9]{8}$)|(^\+(?!33)[0-9]{5,15}$)/")
+     * @ORM\Column(type="phone_number", name="user_phone", nullable=true)
+     * @Assert\NotBlank(groups={"Registration"})
+     * @AssertPhoneNumber(defaultRegion="FR", type="mobile", groups={"Registration"})
      */
-    private $phoneNumber;
+    protected $phoneNumber;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", name="user_phone_confirmed")
+     */
+    protected $phoneConfirmed;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", name="user_phone_code", nullable=true)
+     */
+    protected $phoneCode;
 
     /**
      * @var string Private information
-     * @ORM\Column(type="string", length=32, name="user_nom")
+     * @ORM\Column(type="string", length=32, name="user_last_name")
      *
+     * @Assert\NotBlank(groups={"candidacy", "Registration"})
+     * @Assert\Length(max=32, groups={"candidacy", "Registration"})
+     */
+    protected $lastName;
+
+    /**
+     * @var string Private information
+     *
+     * @ORM\Column(type="string", length=32, name="user_first_name")
+     * @Assert\NotBlank(groups={"candidacy", "Registration"})
+     * @Assert\Length(max=32, groups={"candidacy", "Registration"})
+     */
+    protected $firstName;
+
+    /**
+     * @var string Private information
+     *
+     * @ORM\Column(type="string", length=1, name="user_gender", nullable=true)
      * @Assert\NotBlank(groups={"candidacy"})
-     * @Assert\Length(max=32, groups={"candidacy"})
-     */
-    private $lastName;
-
-    /**
-     * @var string Private information
-     * @ORM\Column(type="string", length=32, name="user_prenom")
-     *
-     * @Assert\NotBlank(groups={"candidacy"})
-     * @Assert\Length(max=32, groups={"candidacy"})
-     */
-    private $firstName;
-
-    /**
-     * @var string Private information
-     * @ORM\Column(type="string", length=1, name="user_genre", nullable=true)
-     *
      * @Assert\Choice(choices={"M", "F"}, groups={"candidacy"})
      */
-    private $gender;
+    protected $gender;
 
     /**
      * @var \Datetime Private information
-     * @ORM\Column(type="date", name="user_date_naissance", nullable=true)
-     */
-    private $birthDate;
-
-    /**
-     * @var string Private information
-     * @ORM\Column(type="string", length=8, name="user_code_postal")
      *
-     * @Assert\Range(min=1000,max=99999)
+     * @ORM\Column(type="date", name="user_birth_date", nullable=true)
+     * @Assert\NotBlank(groups={"Registration"})
+     * @Assert\Date()
+     * @Assert\LessThan("now")
      */
-    private $zipCode;
+    protected $birthDate;
 
     /**
      * @var string Private information
-     * @ORM\Column(type="string", length=32, name="user_ville", nullable=true)
+     *
+     * @ORM\Column(type="string", length=8, name="user_postcode")
+     * @Assert\NotBlank(groups={"Registration", "freeze"})
+     * @Assert\Range(min=1000,max=99999, groups={"Registration", "freeze"})
      */
-    private $city;
+    protected $postCode;
+
+    /**
+     * @var string Private information
+     *
+     * @ORM\Column(type="string", length=32, name="user_city", nullable=true)
+     */
+    protected $city;
 
     /**
      * @var string Private information.
-     * @ORM\Column(type="string", length=32, name="user_pays", nullable=true)
+     *
+     * @ORM\Column(type="string", length=32, name="user_country", nullable=true)
+     * @Assert\NotBlank(groups={"Registration"})
+     * @Assert\Country(groups={"Registration"})
      */
-    private $country;
+    protected $country;
 
     /**
      * @deprecated
+     *
      * @ORM\Column(type="boolean", name="user_signature", nullable=true)
      */
-    private $signature;
+    protected $signature;
 
     /**
      * @var string Public information.
-     * @ORM\Column(type="text", name="user_biographie", nullable=true)
+     *
+     * @ORM\Column(type="text", name="user_biography", nullable=true)
      */
-    private $biography;
+    protected $biography;
 
     /**
      * Lock during lock period.
      *
      * @var \AppBundle\Entity\Poll\ProfileLock
      *
-     * @ORM\OneToOne(targetEntity="\AppBundle\Entity\Poll\ProfileLock", mappedBy="user")
+     * @ORM\Column(type="boolean", name="profile_frozen", options={"default"=false})
      */
-    private $profileLocked;
+    protected $profileFrozen;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->profileFrozen = false;
+    }
 
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set username.
-     *
-     * @param string $username
-     *
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getUsername()
-    {
-        return $this->username;
     }
 
     /**
@@ -290,9 +325,11 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @inheritDoc
      */
-    public function getPassword()
+    public function isAccountNonLocked()
     {
-        return $this->password;
+        $notBlocked = in_array($this->level, array('normal', 'moderator', 'admin'), true);
+
+        return $notBlocked && parent::isAccountNonLocked();
     }
 
     /**
@@ -300,15 +337,24 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getRoles()
     {
-        $roles = array('ROLE_USER');
+        $roles = parent::getRoles();
 
         if ('admin' === $this->level) {
             $roles[] = 'ROLE_ADMIN';
         }
 
-        return $roles;
+        $roles[] = ($this->isPhoneConfirmed() ? 'ROLE_VOTER' : 'ROLE_PHONE_NOT_CONFIRMED');
+
+        return array_unique($roles);
     }
 
+    /**
+     * Find avatar path.
+     *
+     * @param string $size large, small or original
+     *
+     * @return string relative URL of the image
+     */
     public function getAvatarPath($size)
     {
         if (!in_array($size, array('large', 'small', 'original'), true)) {
@@ -333,26 +379,11 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @param string $zipCode
-     */
-    public function setZipCode($zipCode)
-    {
-        $this->zipCode = $zipCode;
-    }
-
-    /**
-     * @return string
-     */
-    public function getZipCode()
-    {
-        return $this->zipCode;
-    }
-
-    /**
      * @param string $phoneNumber
      */
     public function setPhoneNumber($phoneNumber)
     {
+        $this->phoneConfirmed = false;
         $this->phoneNumber = $phoneNumber;
     }
 
@@ -365,41 +396,99 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set password.
+     * Set phone code.
      *
-     * @param string $password
-     *
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Set email.
-     *
-     * @param string $email
+     * @param string $code
      *
      * @return User
      */
-    public function setEmail($email)
+    public function setPhoneCode($code)
     {
-        $this->email = $email;
-
-        return $this;
+        $this->phoneCode = $code;
     }
 
     /**
-     * Get email.
+     * Get phone code.
      *
      * @return string
      */
-    public function getEmail()
+    public function getPhoneCode()
     {
-        return $this->email;
+        return $this->phoneCode;
+    }
+
+    /**
+     * Get phoneConfirmed.
+     *
+     * @return bool
+     */
+    public function isPhoneConfirmed()
+    {
+        return $this->phoneConfirmed;
+    }
+
+    /**
+     * Set phoneConfirmed.
+     *
+     * @param bool
+     *
+     * @return User
+     */
+    public function setPhoneConfirmed($phoneConfirmed)
+    {
+        $this->phoneConfirmed = $phoneConfirmed;
+
+        return $this;
+    }
+
+    /**
+     * Get profileFrozen.
+     *
+     * @return bool
+     */
+    public function isProfileFrozen()
+    {
+        return $this->profileFrozen;
+    }
+
+    /**
+     * Set profileFrozen.
+     *
+     * @param bool
+     *
+     * @return User
+     */
+    public function setProfileFrozen($profileFrozen)
+    {
+        $this->profileFrozen = $profileFrozen;
+
+        return $this;
+    }
+
+    /**
+     * @param string $postCode
+     */
+    public function setZipCode($postCode)
+    {
+        $this->postCode = $postCode;
+    }
+
+    public function setPostCode($postCode)
+    {
+        return $this->setZipCode($postCode);
+    }
+
+    /**
+     * @return string
+     */
+    public function getZipCode()
+    {
+        return $this->postCode;
+    }
+
+    public function getPostCode()
+    {
+        return $this->getZipCode();
     }
 
     /**
@@ -472,30 +561,6 @@ class User implements AdvancedUserInterface, \Serializable
     public function getUrl()
     {
         return $this->url;
-    }
-
-    /**
-     * Set lastLogin.
-     *
-     * @param \DateTime $lastLogin
-     *
-     * @return User
-     */
-    public function setLastLogin($lastLogin)
-    {
-        $this->lastLogin = $lastLogin;
-
-        return $this;
-    }
-
-    /**
-     * Get lastLogin.
-     *
-     * @return \DateTime
-     */
-    public function getLastLogin()
-    {
-        return $this->lastLogin;
     }
 
     /**
@@ -691,99 +756,51 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set userIP.
+     * Set IP.
      *
-     * @param string $userIP
+     * @param string $IP
      *
      * @return User
      */
-    public function setUserIP($userIP)
+    public function setIP($IP)
     {
-        $this->userIP = $userIP;
+        $this->IP = $IP;
 
         return $this;
     }
 
     /**
-     * Get userIP.
+     * Get IP.
      *
      * @return string
      */
-    public function getUserIP()
+    public function getIP()
     {
-        return $this->userIP;
+        return $this->IP;
     }
 
     /**
-     * Set userLastIP.
+     * Set lastIP.
      *
-     * @param string $userLastIP
+     * @param string $lastIP
      *
      * @return User
      */
-    public function setUserLastIP($userLastIP)
+    public function setLastIP($lastIP)
     {
-        $this->userLastIP = $userLastIP;
+        $this->lastIP = $lastIP;
 
         return $this;
     }
 
     /**
-     * Get userLastIP.
+     * Get lastIP.
      *
      * @return string
      */
-    public function getUserLastIP()
+    public function getLastIP()
     {
-        return $this->userLastIP;
-    }
-
-    /**
-     * Set lastResetRequest.
-     *
-     * @param \DateTime $lastResetRequest
-     *
-     * @return User
-     */
-    public function setLastResetRequest($lastResetRequest)
-    {
-        $this->lastResetRequest = $lastResetRequest;
-
-        return $this;
-    }
-
-    /**
-     * Get lastResetRequest.
-     *
-     * @return \DateTime
-     */
-    public function getLastResetRequest()
-    {
-        return $this->lastResetRequest;
-    }
-
-    /**
-     * Set lastResetCode.
-     *
-     * @param string $lastResetCode
-     *
-     * @return User
-     */
-    public function setLastResetCode($lastResetCode)
-    {
-        $this->lastResetCode = $lastResetCode;
-
-        return $this;
-    }
-
-    /**
-     * Get lastResetCode.
-     *
-     * @return string
-     */
-    public function getLastResetCode()
-    {
-        return $this->lastResetCode;
+        return $this->lastIP;
     }
 
     /**
@@ -856,30 +873,6 @@ class User implements AdvancedUserInterface, \Serializable
     public function getCategories()
     {
         return $this->categories;
-    }
-
-    /**
-     * Set enabled.
-     *
-     * @param boolean $enabled
-     *
-     * @return User
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
-
-        return $this;
-    }
-
-    /**
-     * Get enabled.
-     *
-     * @return boolean
-     */
-    public function getEnabled()
-    {
-        return $this->enabled;
     }
 
     /**
@@ -1072,84 +1065,6 @@ class User implements AdvancedUserInterface, \Serializable
     public function getBiography()
     {
         return $this->biography;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isProfileLocked()
-    {
-        return (null !== $this->profileLocked);
-    }
-
-    /**
-     * All functions of AdvancedUserInterface start here.
-     */
-
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials()
-    {
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isAccountNonExpired()
-    {
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isAccountNonLocked()
-    {
-        $confirmed = $this->lastLogin > new \DateTime('00-00-0000 00:00:00');
-        $notBlocked = in_array($this->level, array('normal', 'moderator', 'admin'), true);
-
-        return $confirmed && $notBlocked;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isCredentialsNonExpired()
-    {
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isEnabled()
-    {
-        return true;
-    }
-
-    /**
-     * @see \Serializable::serialize()
-     */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-        ));
-    }
-
-    /**
-     * @see \Serializable::unserialize()
-     */
-    public function unserialize($serialized)
-    {
-        list(
-            $this->id,
-            $this->username,
-            $this->password,
-        ) = unserialize($serialized);
     }
 
     public function __toString()

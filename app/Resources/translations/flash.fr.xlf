@@ -10,6 +10,10 @@
         <source>flash.vote.sent</source>
         <target>Merci ! Votre vote a bien été enregistré.</target>
       </trans-unit>
+      <trans-unit id="1" resname="error.send.sms">
+        <source>error.send.sms</source>
+        <target>Il y a eu une erreur lors de l'envoi du SMS. L'équipe travaille à sa résolution.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

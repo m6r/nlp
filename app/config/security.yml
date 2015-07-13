@@ -1,20 +1,19 @@
 # you can read more about security in the related section of the documentation
 # http://symfony.com/doc/current/book/security.html
 security:
+    always_authenticate_before_granting:  true
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
     # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
     encoders:
-        AppBundle\Entity\User:
+        FOS\UserBundle\Model\UserInterface:
             id: app.sha256_pligg_encoder
 
     # http://symfony.com/doc/current/book/security.html#hierarchical-roles
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-
-    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
-    providers:
-        nouslepeuple:
-            entity: { class: AppBundle:User, property: username }
 
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
@@ -24,16 +23,18 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
         # secures part of the application
-        default:
+        main:
             pattern: ^/
-            anonymous: ~
-            http_basic: ~
+            anonymous: true
             form_login:
                 login_path: /login
                 check_path: /login_check
-            logout:
-                path:   /logout
-                target: /
+                provider: fos_userbundle
+                csrf_provider: security.csrf.token_manager
+                #target_path: /welcome
+                #always_use_default_target_path: true
+            logout: true
+            access_denied_handler: app.security.access_denied_handler
 
     # with these settings you can restrict or allow access for different parts
     # of your application based on roles, ip, host or methods
@@ -41,3 +42,5 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }

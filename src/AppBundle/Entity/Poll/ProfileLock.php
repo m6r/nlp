@@ -2,8 +2,8 @@
 
 namespace AppBundle\Entity\Poll;
 
-use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\User;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * When the admins start a "lock profile" period, people cannot modify their
@@ -36,7 +36,7 @@ class ProfileLock
     /**
      * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

@@ -3,11 +3,11 @@
 namespace AppBundle\Entity\Poll;
 
 use AppBundle\Entity\User;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Table(name="polls_election_votes")
@@ -146,7 +146,7 @@ class ElectionVote
         foreach ($this->candidacies as $candidacy) {
             $gender = $candidacy->getUser()->getGender();
             $count[$gender]++;
-            if ($count[$gender] > $total/2) {
+            if ($count[$gender] > $total / 2) {
                 $context->buildViolation('gender_parity')
                     ->atPath('candidacies')
                     ->addViolation();

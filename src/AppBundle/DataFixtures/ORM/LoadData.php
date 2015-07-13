@@ -1,12 +1,12 @@
 <?php
+
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Nelmio\Alice\Fixtures;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Nelmio\Alice\Fixtures;
 
 class LoadData implements FixtureInterface, ContainerAwareInterface
 {
@@ -31,7 +31,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         $prefix = $this->container->getParameter('table_prefix');
         // The main category cannot be insert as an entity
         // Reset auto increment
-        $sql = 'ALTER TABLE '.$prefix.'categories AUTO_INCREMENT = 0';
+        $sql = 'ALTER TABLE '.$prefix.'categories AUTO_INCREMENT = 1';
         $manager->getConnection()->prepare($sql)->execute();
         // We need id = 0 so NO_AUTO_VALUE_ON_ZERO must be activated in Mysql SQL mode
         // We save the old mode to rest it after.

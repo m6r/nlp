@@ -1,12 +1,12 @@
 <?php
+
 namespace AppBundle\Admin\Poll;
 
 use AppBundle\Poll\ElectionRuler;
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 
 class ElectionAdmin extends Admin
 {
@@ -51,11 +51,11 @@ class ElectionAdmin extends Admin
             ->add('description')
             ->add('group', 'choice', array(
                 'choices' => $this->ruleGroups,
-                'label' => 'Rules group'
+                'label' => 'Rules group',
             ))
             ->add('criteria', 'choice', array(
                 'choices' => $this->ruleCriterias,
-                'label' => 'Rules criteria'
+                'label' => 'Rules criteria',
             ))
             ->add('openCandidacyDate')
             ->add('closeCandidacyDate')

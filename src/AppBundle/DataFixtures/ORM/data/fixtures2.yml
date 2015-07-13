@@ -6,15 +6,16 @@ AppBundle\Entity\User:
         publicEmail: "20%? <safeEmail()> :  "
         url: "20%? <url()> :  "
         lastLogin: <dateTimeBetween('-200 days', 'now')>
-        userIP: <ipv4()>
-        phoneNumber: "95%? <regexify('0[1-9][0-9]{8}')> : <regexify('\+[0-9]{8,15}')>"
+        IP: <ipv4()>
+        phoneNumber: "95%? <regexify('0[6-7][0-9]{8}')> : <regexify('\+[0-9]{8,15}')>"
         lastName: <lastName()>
         firstName: <firstName()>
         gender: "<randomElement(array('M', 'F'))>"
         birthDate: <dateTime($lastLogin)>
         zipCode: <randomNumber(5)>
         city: <city()>
-        country: "95%? France : <country()>"
+        country: "95%? FR : <countryCode()>"
+        enabled: true
     admin (extends user):
         id: 1
         username: admin
