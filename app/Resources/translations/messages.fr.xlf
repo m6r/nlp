@@ -165,9 +165,7 @@
       </trans-unit>
       <trans-unit id="957dd7411b2b24c330a0921a7182265a" resname="candidacy.identity.information">
         <source>candidacy.identity.information</source>
-        <target>Votre nom et votre prénom ne seront pas publics durant la phase de vote.
-          Néanmoins, ils seront publiés si vous êtes élu-e lors de la proclamation des résultats.
-          Vous pouvez choisir de rester anonyme en cochant la case ci-dessous.</target>
+        <target>L'identité indiquée ici sera publique.</target>
       </trans-unit>
       <trans-unit id="1c9f965124825a42894fcc2f854eb6cb" resname="label.hideIdentity">
         <source>label.hideIdentity</source>

@@ -33,7 +33,7 @@
     <div class="col-md-4 text-center">
       <h2>
         <a target="_blank" href="{{ path('profile', {'username': candidacy.user.username}) }}">
-          {{ candidacy.user.username }}
+          {{ candidacy.user.firstName }} {{ candidacy.user.lastName }}
         </a>
       </h2>
       <img src="{{ asset(candidacy.user.avatarPath('large')) }}" class="img-circle">

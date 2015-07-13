@@ -52,48 +52,51 @@
     </h1>
   </div>
 
-    <div class="row">
+  <div class="row">
+    <div class="col-md-12">
       <h2>{{ 'title.candidacies.list'|trans }}</h2>
-      <div class="col-md-6">
-        <div class="alert alert-warning">
-          {{ 'vote.information.%voteNumber%'|transchoice(voteNumber,{'%voteNumber%': voteNumber}) }}
-          {% if parity %}{{ 'vote.information.parity'|trans }}{% endif %}
-          <br>
-          {{ 'help.clickCandidacyToSee'|trans }}
-        </div>
-        {{ form_start(form) }}
-          {{ form_errors(form) }}
-          {{ form_errors(form.candidacies) }}
-          <div class="row nlp-candidacy-list">
-            {% for candidacyField in form.candidacies|shuffle %}
-              {% set candidacy = form.candidacies.vars.choices[candidacyField.vars.value].data %}
-              <div class="col-sm-3 col-xs-6 text-center nlp-candidacy">
-                <h5 class="nlp-candidacy-username">
-                  {% if 'M' == candidacy.user.gender %}
-                    {% set gender = 'label.gender.male'|trans %}
-                  {% elseif 'F' == candidacy.user.gender %}
-                    {% set gender = 'label.gender.female'|trans %}
-                  {% endif %}
-                  {{ form_widget(candidacyField, {'label': (candidacy.user.username|e ~ ' (' ~ gender ~ ')')}) }}
-                </h5>
-                <img src="{{ asset(candidacy.user.avatarPath('large')) }}" class="img-thumbnail">
-                <a href="{{ path('profile', {'username': candidacy.user.username}) }}" class="sr-only nlp-candidacy-profile-link">{{ 'link.profile'|trans }}</a>
-                <p class="sr-only nlp-candidacy-description">{{ candidacy.description|nl2br }}</p>
-              </div>
-              {% if 0 == loop.index % 4 %}<div class="clearfix"></div>{% endif %}
-            {% else %}
-              <h3>{{ 'election.noCandidates'|trans }}</h3>
-            {% endfor %}
-          </div>
-          <input type="submit" value="{{ 'label.validate'|trans }}" class="btn btn-primary btn-block btn-lg">
-        {{ form_end(form) }}
-      </div>
-      <div class="col-md-6">
-        <h3 id="nlp-candidacy-username"></h3>
-        <p id="nlp-candidacy-description"></p>
-        <p class="text-muted text-center">{{ 'help.clickCandidacyToSee'|trans }}</p>
-      </div>
     </div>
+    <div class="col-md-6">
+      <div class="alert alert-warning">
+        {{ 'vote.information.%voteNumber%'|transchoice(voteNumber,{'%voteNumber%': voteNumber}) }}
+        {% if parity %}{{ 'vote.information.parity'|trans }}{% endif %}
+        <br>
+        {{ 'help.clickCandidacyToSee'|trans }}
+      </div>
+      {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_errors(form.candidacies) }}
+        <div class="row nlp-candidacy-list">
+          {% for candidacyField in form.candidacies|shuffle %}
+            {% set candidacy = form.candidacies.vars.choices[candidacyField.vars.value].data %}
+            <div class="col-sm-3 col-xs-6 text-center nlp-candidacy">
+              <h5 class="nlp-candidacy-username">{% spaceless %}
+                {% if 'M' == candidacy.user.gender %}
+                  {% set gender = 'label.gender.male'|trans %}
+                {% elseif 'F' == candidacy.user.gender %}
+                  {% set gender = 'label.gender.female'|trans %}
+                {% endif %}
+                {{ form_widget(candidacyField, {'label': (candidacy.user.username|e ~ ' (' ~ gender ~ ')')}) }}
+              {% endspaceless %}</h5>
+              <img src="{{ asset(candidacy.user.avatarPath('large')) }}" class="img-thumbnail">
+              <a href="{{ path('profile', {'username': candidacy.user.username}) }}" class="sr-only nlp-candidacy-profile-link">{{ 'link.profile'|trans }}</a>
+              <p class="sr-only nlp-candidacy-description">{{ candidacy.description|nl2br }}</p>
+              <p class="sr-only nlp-candidacy-realname">{{ candidacy.user.firstName }} {{ candidacy.user.lastName }}</p>
+            </div>
+            {% if 0 == loop.index % 4 %}<div class="clearfix"></div>{% endif %}
+          {% else %}
+            <h3>{{ 'election.noCandidates'|trans }}</h3>
+          {% endfor %}
+        </div>
+        <input type="submit" value="{{ 'label.validate'|trans }}" class="btn btn-primary btn-block btn-lg">
+      {{ form_end(form) }}
+    </div>
+    <div class="col-md-6">
+      <h3 id="nlp-candidacy-name"></h3>
+      <p id="nlp-candidacy-description"></p>
+      <p class="text-muted text-center">{{ 'help.clickCandidacyToSee'|trans }}</p>
+    </div>
+  </div>
 {% endblock %}
 
 {% block javascript_footer %}
@@ -103,10 +106,11 @@
       $('.nlp-candidacy').click(function() {
         $('.nlp-candidacy.active').removeClass('active');
         $(this).addClass('active');
-        var username = $(this).find('.nlp-candidacy-username').text();
+        var realname = $(this).find('.nlp-candidacy-realname').text();
+        var username = $(this).find('.nlp-candidacy-username').text().split(' ')[0];
         var description = $(this).find('.nlp-candidacy-description').html();
         var href = $(this).find('a.nlp-candidacy-profile-link').attr('href');
-        $('#nlp-candidacy-username').html(username + ' <small><a href="' + href + '" target="_blank">{{ 'link.profile'|trans }}</a></small>');
+        $('#nlp-candidacy-name').html(realname + ' <small>( <a href="' + href + '" target="_blank">' + username + '</a> )</small>');
         $('#nlp-candidacy-description').html(description);
       })
 

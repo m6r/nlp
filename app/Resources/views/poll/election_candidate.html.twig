@@ -29,7 +29,6 @@
         {{ form_row(form.user.lastName, {'label': 'label.lastName'|trans}) }}
         <div class="form-group">
           <span class="help-block">{{ 'candidacy.identity.information'|trans }}</span>
-          {{ form_widget(form.hideIdentity, {'label': 'label.hideIdentity'|trans}) }}
         </div>
         {{ form_row(form.description, {'label': 'candidacy.label.description'|trans, 'attr': {'rows': 15}}) }}
         {{ form_widget(form.confirmation, {'label': 'candidacy.confirmation'|trans}) }}

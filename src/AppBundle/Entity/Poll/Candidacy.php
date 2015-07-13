@@ -82,6 +82,7 @@ class Candidacy
     public function __construct(Election $election)
     {
         $this->election = $election;
+        $this->hideIdentity = false;
     }
 
     /**

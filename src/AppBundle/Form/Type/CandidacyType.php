@@ -14,7 +14,6 @@ class CandidacyType extends AbstractType
         $builder
             ->add('description')
             ->add('user', new CandidacyEmbedUserType())
-            ->add('hideIdentity', null, array('required' => false))
             ->add('confirmation', 'checkbox', array(
                 'mapped' => false,
                 'constraints' => array(new NotBlank()),
