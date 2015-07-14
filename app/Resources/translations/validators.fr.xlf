@@ -10,15 +10,15 @@
         <source>max_candidacies</source>
         <target>Vous avez choisi trop de candidats ! Veuillez sélectionner au plus {{ limit }} candidats.</target>
       </trans-unit>
-      <trans-unit id="212d640afe6dd339b764b4d445aa0cbf" resname="account.phone.already_used">
+      <trans-unit id="e1d2ea53e6a362cbd487324d2c7a4650" resname="account.phone.already_used">
         <source>account.phone.already_used</source>
         <target>Ce numéro de téléphone est déjà utilisé par un autre compte.</target>
       </trans-unit>
-      <trans-unit id="1" resname="This value is not a valid {{ type }} number.">
+      <trans-unit id="f39e3adfaafe9fff3f810f41bdd9d02b" resname="This value is not a valid {{ type }} number.">
         <source>This value is not a valid {{ type }} number.</source>
         <target>Cette valeur n'est pas un numéro de {{ type }} valide.</target>
       </trans-unit>
-      <trans-unit id="2" resname="error.invalid_code">
+      <trans-unit id="b5feb87a03e622f4be0246b99dd1a398" resname="error.invalid_code">
         <source>error.invalid_code</source>
         <target>Code invalide</target>
       </trans-unit>
