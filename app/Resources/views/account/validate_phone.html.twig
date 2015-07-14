@@ -10,6 +10,9 @@
         {{ form_start(form) }}
           {{ form_widget(form) }}
           <input type="submit" value="{{ 'label.validate_phone'|trans }}" class="btn btn-primary">
+          <div class="text-right">
+            <a href="{{ path('edit_phone') }}">{{ 'edit.phoneNumber'|trans }}</a>
+          </div>
         {{ form_end(form) }}
       {% else %}
         {{ form_start(sendCodeForm) }}
@@ -17,6 +20,9 @@
             {{ 'text.help.phone_validate.send_code'|trans }}
           </div>
           <input type="submit" value="{{ 'label.send_phone_code'|trans }}" class="btn btn-primary">
+          <div class="text-right">
+            <a href="{{ path('edit_phone') }}">{{ 'edit.phoneNumber'|trans }}</a>
+          </div>
         {{ form_end(sendCodeForm) }}
       {% endif %}
     </div>

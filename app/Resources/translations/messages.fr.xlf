@@ -332,6 +332,10 @@
         <source>text.help.required</source>
         <target>Ce champ est requis</target>
       </trans-unit>
+      <trans-unit id="54e1a2868b3249e762ce3c5bf9dfb420" resname="edit.phoneNumber">
+        <source>edit.phoneNumber</source>
+        <target>Changer le numéro de téléphone</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

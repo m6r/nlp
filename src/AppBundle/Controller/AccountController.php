@@ -12,11 +12,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\Security\Core\Util\StringUtils;
 
+/**
+ * @Security("is_granted('ROLE_USER')")
+ */
 class AccountController extends Controller
 {
     /**
      * @Route("/account/validate", name="validate_profile")
-     * @Security("is_granted('ROLE_USER') and not is_granted('IS_PROFILE_LOCKED')")
+     * @Security("not is_granted('IS_PROFILE_LOCKED')")
      */
     public function profileValidateAction(Request $request)
     {
@@ -40,8 +43,39 @@ class AccountController extends Controller
     }
 
     /**
+     * @Route("/account/edit-phone", name="edit_phone")
+     * @Security("is_granted('IS_PROFILE_LOCKED') and is_granted('ROLE_PHONE_NOT_CONFIRMED')")
+     */
+    public function editPhoneNumberAction(Request $request)
+    {
+        $user = $this->getUser();
+        $form = $this->createFormBuilder($user, array('validation_groups' => array('freeze')))
+            ->add('phoneNumber', 'tel', array(
+                'default_region' => 'FR',
+                'format' => PhoneNumberFormat::NATIONAL,
+                'label' => 'label.phoneNumber',
+            ))
+            ->getForm()
+        ;
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('validate_phone'));
+        }
+
+        return $this->render('account/edit_phone.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
      * @Route("/account/validate-phone", name="validate_phone")
-     * @Security("is_granted('ROLE_USER') and is_granted('IS_PROFILE_LOCKED')")
+     * @Security("is_granted('IS_PROFILE_LOCKED') and is_granted('ROLE_PHONE_NOT_CONFIRMED')")
      */
     public function validatePhoneAction(Request $request)
     {
@@ -83,7 +117,6 @@ class AccountController extends Controller
 
     /**
      * @Route("/account/validate-phone/send-code", name="phone_send_code")
-     * @Security("is_granted('ROLE_USER')")
      */
     public function sendPhoneValidationCodeAction(Request $request)
     {
