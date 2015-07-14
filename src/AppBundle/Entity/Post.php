@@ -42,7 +42,8 @@ class Post
     private $id;
 
     /**
-     * @ORM\Column(type="integer", name="link_author", options={"default"=0})
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="link_author", referencedColumnName="user_id")
      */
     private $author;
 
