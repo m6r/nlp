@@ -384,6 +384,7 @@ class User extends BaseUser
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneConfirmed = false;
+        $this->phoneCode = null;
         $this->phoneNumber = $phoneNumber;
     }
 
@@ -440,6 +441,79 @@ class User extends BaseUser
 
         return $this;
     }
+
+    /**
+     * Set avatar_source.
+     *
+     * @param string $avatarSource
+     *
+     * @return User
+     */
+    public function setAvatarSource($avatarSource)
+    {
+        $this->avatarSource = $avatarSource;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar_source.
+     *
+     * @return string
+     */
+    public function getAvatarSource()
+    {
+        return $this->avatarSource;
+    }
+
+    /**
+     * Set IP.
+     *
+     * @param string $IP
+     *
+     * @return User
+     */
+    public function setIP($IP)
+    {
+        $this->IP = $IP;
+
+        return $this;
+    }
+
+    /**
+     * Get IP.
+     *
+     * @return string
+     */
+    public function getIP()
+    {
+        return $this->IP;
+    }
+
+    /**
+     * Set lastIP.
+     *
+     * @param string $lastIP
+     *
+     * @return User
+     */
+    public function setLastIP($lastIP)
+    {
+        $this->lastIP = $lastIP;
+
+        return $this;
+    }
+
+    /**
+     * Get lastIP.
+     *
+     * @return string
+     */
+    public function getLastIP()
+    {
+        return $this->lastIP;
+    }
+
 
     /**
      * Get profileFrozen.
@@ -729,78 +803,6 @@ class User extends BaseUser
     public function getPublicEmail()
     {
         return $this->publicEmail;
-    }
-
-    /**
-     * Set avatar_source.
-     *
-     * @param string $avatarSource
-     *
-     * @return User
-     */
-    public function setAvatarSource($avatarSource)
-    {
-        $this->avatarSource = $avatarSource;
-
-        return $this;
-    }
-
-    /**
-     * Get avatar_source.
-     *
-     * @return string
-     */
-    public function getAvatarSource()
-    {
-        return $this->avatarSource;
-    }
-
-    /**
-     * Set IP.
-     *
-     * @param string $IP
-     *
-     * @return User
-     */
-    public function setIP($IP)
-    {
-        $this->IP = $IP;
-
-        return $this;
-    }
-
-    /**
-     * Get IP.
-     *
-     * @return string
-     */
-    public function getIP()
-    {
-        return $this->IP;
-    }
-
-    /**
-     * Set lastIP.
-     *
-     * @param string $lastIP
-     *
-     * @return User
-     */
-    public function setLastIP($lastIP)
-    {
-        $this->lastIP = $lastIP;
-
-        return $this;
-    }
-
-    /**
-     * Get lastIP.
-     *
-     * @return string
-     */
-    public function getLastIP()
-    {
-        return $this->lastIP;
     }
 
     /**
