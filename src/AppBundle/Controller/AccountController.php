@@ -93,8 +93,6 @@ class AccountController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $code = $form->get('code')->getData();
-            dump($code);
-            dump($user->getPhoneCode());
 
             if (StringUtils::equals($user->getPhoneCode(), $code)) {
                 $user->setPhoneConfirmed(true);
