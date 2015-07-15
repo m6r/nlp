@@ -15,14 +15,14 @@ class UserAdmin extends Admin
     {
         $formMapper
             ->add('email')
-            ->add('enabled', null, array('label' => 'Enabled'))
-            ->add('locked')
+            ->add('enabled', null, array('required' => false))
+            ->add('locked', null, array('required' => false))
             ->add('phoneNumber', 'tel', array(
                 'default_region' => 'FR',
                 'format' => PhoneNumberFormat::NATIONAL,
                 'label' => 'label.phoneNumber',
             ))
-            ->add('phoneConfirmed')
+            ->add('phoneConfirmed', null, array('required' => false))
             ->add('firstName')
             ->add('lastName')
             ->add('gender')
