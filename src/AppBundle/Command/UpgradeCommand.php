@@ -115,7 +115,6 @@ class UpgradeCommand extends ContainerAwareCommand
         )->execute();
         $conn->prepare('CREATE UNIQUE INDEX UNIQ_15F8030192FC23A8 ON pligg_users (username_canonical)')->execute();
         $conn->prepare('CREATE UNIQUE INDEX UNIQ_15F80301A0D96FBF ON pligg_users (email_canonical)')->execute();
-        $conn->prepare('ALTER TABLE pligg_links CHANGE link_modified link_modified DATETIME NOT NULL')->execute();
 
         $sql = 'SELECT user_id, user_phone FROM pligg_users';
         $stmt = $conn->query($sql);
@@ -123,7 +122,7 @@ class UpgradeCommand extends ContainerAwareCommand
         while ($user = $stmt->fetch()) {
             $phoneUtil = $this->getContainer()->get('libphonenumber.phone_number_util');
 
-            if ($phoneUtil->isPossibleNumber($user['user_phone'], 'FR')) {
+            if ($user['user_phone'] && $phoneUtil->isPossibleNumber($user['user_phone'], 'FR')) {
                 $phoneNumber = $phoneUtil->parse($user['user_phone'], 'FR');
                 $phoneNumber = $phoneUtil->format($phoneNumber, PhoneNumberFormat::E164);
             } else {
