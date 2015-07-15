@@ -514,7 +514,6 @@ class User extends BaseUser
         return $this->lastIP;
     }
 
-
     /**
      * Get profileFrozen.
      *

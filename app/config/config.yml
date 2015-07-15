@@ -97,6 +97,11 @@ sonata_block:
     blocks:
         sonata.admin.block.admin_list:
             contexts:   [admin]
+sonata_doctrine_orm_admin:
+    templates:
+        form:
+            - form_admin_fields_checkbox_label_workaround.html.twig
+
 # FOSUserBundle
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'

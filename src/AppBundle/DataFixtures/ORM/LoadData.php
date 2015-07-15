@@ -79,7 +79,7 @@ class LoadData implements FixtureInterface, ContainerAwareInterface
         try {
             return $phoneUtil->parse($phoneNumber, 'FR');
         } catch (\Exception $e) {
-            return null;
+            return;
         }
     }
 }

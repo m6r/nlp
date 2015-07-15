@@ -23,7 +23,7 @@ services:
             - ~
             - AppBundle\Entity\Poll\PollQuestion
             - ~
-    sonata.admin.poll.Choice:
+    sonata.admin.poll.choice:
         class: AppBundle\Admin\Poll\PollChoiceAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Polls", label: "Choice" }
@@ -40,3 +40,11 @@ services:
             - AppBundle\Entity\Poll\Election
             - ~
             - @app.election_ruler
+    sonata.admin.poll.candidacy:
+        class: AppBundle\Admin\Poll\CandidacyAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Election", label: "Candidacy" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Poll\Candidacy
+            - ~

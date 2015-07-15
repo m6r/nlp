@@ -2,11 +2,12 @@
 
 namespace AppBundle\Admin;
 
-use AppBundle\Entity\User;
+use libphonenumber\PhoneNumberFormat;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class UserAdmin extends Admin
 {
@@ -14,13 +15,42 @@ class UserAdmin extends Admin
     {
         $formMapper
             ->add('email')
-            ->add('enabled')
+            ->add('enabled', null, array('label' => 'Enabled'))
             ->add('locked')
+            ->add('phoneNumber', 'tel', array(
+                'default_region' => 'FR',
+                'format' => PhoneNumberFormat::NATIONAL,
+                'label' => 'label.phoneNumber',
+            ))
+            ->add('phoneConfirmed')
             ->add('firstName')
             ->add('lastName')
             ->add('gender')
-            ->add('phoneNumber')
+            ->add('postCode')
+            ->add('city')
+            ->add('country')
+        ;
+    }
+
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->add('email')
+            ->add('username')
+            ->add('enabled')
+            ->add('locked')
+            ->add('phoneNumber', 'tel', array(
+                'default_region' => 'FR',
+                'format' => PhoneNumberFormat::NATIONAL,
+                'label' => 'label.phoneNumber',
+            ))
             ->add('phoneConfirmed')
+            ->add('firstName')
+            ->add('lastName')
+            ->add('gender')
+            ->add('postCode')
+            ->add('city')
+            ->add('country')
         ;
     }
 
@@ -29,8 +59,16 @@ class UserAdmin extends Admin
     {
         $datagridMapper
             ->add('username')
+            ->add('email')
+            ->add('phoneNumber')
+            ->add('enabled')
+            ->add('phoneConfirmed')
+            ->add('locked')
             ->add('firstName')
             ->add('lastName')
+            ->add('gender')
+            ->add('city')
+            ->add('country')
         ;
     }
 
@@ -42,11 +80,16 @@ class UserAdmin extends Admin
             ->add('email')
             ->add('enabled')
             ->add('locked')
-            ->add('firstName')
-            ->add('lastName')
-            ->add('gender')
             ->add('phoneNumber')
             ->add('phoneConfirmed')
+            ->add('firstName')
+            ->add('lastName')
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                ),
+            ))
         ;
     }
 }

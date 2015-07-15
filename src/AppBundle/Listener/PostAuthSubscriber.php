@@ -33,7 +33,7 @@ class PostAuthSubscriber implements EventSubscriberInterface
     {
         return array(
             FOSUserEvents::REGISTRATION_CONFIRM => 'onRegistrationConfirm',
-            SecurityEvents::INTERACTIVE_LOGIN => 'onLogin'
+            SecurityEvents::INTERACTIVE_LOGIN => 'onLogin',
         );
     }
 
