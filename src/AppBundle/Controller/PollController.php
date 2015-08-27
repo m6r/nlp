@@ -50,13 +50,13 @@ class PollController extends Controller
         return $this->render('poll/list.html.twig', array(
             'userElections' => $userElections,
             'otherElections' => $otherElections,
-            'pastElections' => $pastElections,
             'userPolls' => $currentPolls,
         ));
     }
 
     /**
      * @Route("/election/{id}/show", name="election_show", requirements={"id": "\d+"})
+     * @Security("is_granted('ELECTION_VIEW', election)")
      */
     public function electionShowAction(Election $election)
     {

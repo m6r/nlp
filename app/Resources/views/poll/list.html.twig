@@ -24,10 +24,4 @@
     <a href="{{ path('election_show', {'id': election.id}) }}">{{ election.name }}</a>
     {% if not loop.last %} - {% endif %}
   {% endfor %}
-
-  {% if pastElections is not empty %}<h1>{{ 'title.list.past.polls'|trans }}</h1>{% endif %}
-  {% for election in pastElections %}
-    <a href="{{ path('election_show', {'id': election.id}) }}">{{ election.name }}</a>
-    {% if not loop.last %} - {% endif %}
-  {% endfor %}
 {% endblock %}

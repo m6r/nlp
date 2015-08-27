@@ -62,6 +62,13 @@ class ElectionRuleVoter implements VoterInterface
         }
 
         switch ($attribute) {
+            case 'ELECTION_VIEW':
+                $opened = (new \DateTime() > $election->getOpenCandidacyDate());
+                $closed = (new \DateTime() > $election->getCloseDate());
+                if ($opened && !$closed) {
+                    return VoterInterface::ACCESS_GRANTED;
+                }
+                break;
             case 'ELECTION_CANDIDATE':
                 $allowed = $this->electionRuler->isAllowedtoCandidate($user, $election);
                 $opened = (new \DateTime() > $election->getOpenCandidacyDate());
